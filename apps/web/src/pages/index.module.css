@@ -1,0 +1,8 @@
+.backup-wrapper {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  margin: 0 auto;
+}

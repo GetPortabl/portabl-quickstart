@@ -1,0 +1,38 @@
+version: "3.4"
+
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - portabl
+    volumes:
+      - /app/node_modules
+
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+    restart: always
+    ports:
+      - 3001:3001
+    networks:
+      - portabl
+    volumes:
+      - /app/node_modules
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  portabl:
+    name: portabl 

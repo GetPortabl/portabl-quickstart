@@ -1,0 +1,39 @@
+{
+  "name": "backup-with-portabl-quickstart",
+  "description": "Get Backup with Portabl up and running.",
+  "author": "dev@getportabl.com",
+  "license": "MIT",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev --parallel",
+    "format": "prettier --write .",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "prepare": "husky install"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint-config-custom": "*",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "prettier": "latest",
+    "turbo": "latest"
+  },
+  "packageManager": "yarn@1.22.15",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=7.0.0"
+  },
+  "lint-staged": {
+    "*.{js,json,yml,yaml,css,scss,ts,tsx,md}": [
+      "prettier --write"
+    ]
+  }
+}
