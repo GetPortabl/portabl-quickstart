@@ -2,7 +2,7 @@
 
 This repository accompanies [Portabl's quickstart guide for Backup with Portabl](https://portabl.redoc.ly/docs/quickstart/backup) and shows an example of integrating the SDKs required for issuing credentials for your users.
 
-Here you will find necessary steps and samples to get the app running on your machine utilizing our [Server Side Node SDK](/docs/sdk/server-side-sdks/node) and our [Client Side React SDK](/docs/sdk/client-side-sdks/backup/react).
+Here you will find necessary steps and samples to get the app running on your machine utilizing our [Server Side Node SDK](https://docs.getportabl.com/docs/sdk/server-side-sdks/node/) and our [Client Side React SDK](https://docs.getportabl.com/docs/sdk/client-side-sdks/backup/react/).
 
 ---
 
