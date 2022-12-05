@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>node.js http server</title>
+    <script src="./env-config.js"></script>
+    <script src="./node_modules/@portabl/js-backup-with-portabl/dist/index.umd.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .backup-wrapper {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+        margin: 0 auto;
+        font-family: system-ui, sans-serif;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="backup-wrapper">
+      <h4>Portabl Backup - Vanilla JS</h4>
+      <div id="portabl-backup-root"></div>
+    </div>
+    <script type="text/javascript">
+      const API_BASE_URL = window._env_.JS_APP_PUBLIC_API_HOST;
+      const PREPARE_BACKUP_ROUTE = '/prepare-backup';
+      const LOAD_BACKUP_DATA_ROUTE = '/load-backup-data';
+      const userId = 'USER_ID_OF_AUTHENTICATED_BANK_TRUST_USER';
+      const initOpts = {
+        prepareBackup: async () => {
+          const data = await fetch(`${API_BASE_URL}${PREPARE_BACKUP_ROUTE}`, { method: 'POST' });
+          const { accessToken } = await data.json();
+
+          return { accessToken };
+        },
+        loadBackupData: ({ accessToken }) => {
+          const { data } = fetch(`${API_BASE_URL}${LOAD_BACKUP_DATA_ROUTE}`, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              accessToken,
+              userId,
+            }),
+          });
+        },
+        redirectUri: 'https://getportabl.com',
+      };
+      Portabl.init(initOpts);
+    </script>
+  </body>
+</html>

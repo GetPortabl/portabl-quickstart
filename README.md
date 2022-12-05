@@ -36,24 +36,22 @@ To run the quickstart example, you may choose to run it with Docker or without i
 
 This repo is configured to be built with Docker, and Docker Compose.
 
-To build images and run containers:
+#### Make Commands:
+
+`up`: builds and starts the container
+`logs`: tails logs on the container
+`stop`: stops the running container
+
+Each of these commands can specify a lib argument which can be one of the available client side libraries: `javascript` or `react`. The default is `javascript`.
+
+#### To start the container:
 
 ```
-# Create a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-docker network create portabl
+make up lib=node
 
-# Start app in detached mode
-docker-compose -f docker-compose.yml up -d
 ```
 
 Open http://localhost:3000.
-
-To shutdown all running containers:
-
-```
-docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
-```
 
 ### Running without Docker
 
@@ -63,11 +61,21 @@ docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
    yarn
    ```
 
-2. Run both "web" and "api" sample projects in dev mode
+2. Run both frontend and "api" sample projects in dev mode
 
-   ```bash
-   yarn dev
-   ```
+You can chose one of the preset commands based on the library you would like to run:
+
+#### Javascript
+
+```bash
+yarn dev:javascript
+```
+
+#### React
+
+```bash
+yarn dev:react
+```
 
 ---
 
@@ -77,7 +85,8 @@ This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package ma
 
 ### Apps and Packages
 
-- `web`: a [Next.js](https://nextjs.org) app
+- `javascript`: a vanilla js web app
+- `react`: a [Next.js](https://nextjs.org) app
 - `api`: an [Express](https://expressjs.com/) server
 - `eslint-config-custom`: `eslint` configurations for client side applications (includes `eslint-config-next` and `eslint-config-prettier`)
 - `eslint-config-custom-server`: `eslint` configurations for server side applications (includes `eslint-config-next` and `eslint-config-prettier`)
