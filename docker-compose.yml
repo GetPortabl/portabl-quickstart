@@ -1,16 +1,28 @@
-version: "3.4"
+version: '3.4'
 
 services:
-  web:
-    container_name: web
+  react:
+    container_name: react
     build:
       context: .
-      dockerfile: ./apps/web/Dockerfile
-      args:
-        NPM_TOKEN: ${NPM_TOKEN}
+      dockerfile: ./apps/react/Dockerfile
     restart: always
     ports:
       - 3000:3000
+    networks:
+      - portabl
+    volumes:
+      - /app/node_modules
+
+  javascript:
+    container_name: javascript
+    build:
+      context: .
+      dockerfile: ./apps/javascript/Dockerfile
+    restart: always
+    tty: true
+    ports:
+      - 3000:80
     networks:
       - portabl
     volumes:
@@ -21,8 +33,6 @@ services:
     build:
       context: .
       dockerfile: ./apps/api/Dockerfile
-      args:
-        NPM_TOKEN: ${NPM_TOKEN}
     restart: always
     ports:
       - 3001:3001
@@ -35,4 +45,4 @@ services:
 # with each other, by using their container name as a hostname
 networks:
   portabl:
-    name: portabl 
+    name: portabl

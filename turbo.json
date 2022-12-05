@@ -2,7 +2,8 @@
   "pipeline": {
     "build": {
       "outputs": ["dist/**", ".next/**", "public/dist/**"],
-      "dependsOn": ["^build", "$NEXT_PUBLIC_API_HOST"]
+      "dependsOn": ["^build"],
+      "env": ["JS_APP_PUBLIC_API_HOST"]
     },
     "test": {
       "outputs": ["coverage/**"],
@@ -13,13 +14,11 @@
       "outputs": []
     },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false
     },
     "clean": {
       "cache": false
-    },
-    "api#dev": {
-      "dependsOn": ["logger#build"]
     }
   }
 }

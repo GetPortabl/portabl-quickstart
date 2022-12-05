@@ -1,7 +1,7 @@
-import { MantineProvider } from "@mantine/core";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AppProps } from "next/app";
-import React from "react";
+import { MantineProvider } from '@mantine/core';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AppProps } from 'next/app';
+import React from 'react';
 
 const queryClient = new QueryClient();
 

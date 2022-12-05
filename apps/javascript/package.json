@@ -1,0 +1,21 @@
+{
+  "name": "javascript",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "generate:env": "chmod +x ./scripts/env.sh && env-cmd -f ./.env --fallback ./scripts/env.sh",
+    "build": "yarn generate:env",
+    "dev": "yarn generate:env && http-server -p 3002",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@portabl/js-backup-with-portabl": "0.0.3",
+    "axios": "^0.27.2"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "eslint": "^8.23.1 ",
+    "eslint-config-custom": "*",
+    "http-server": "^14.1.1"
+  }
+}

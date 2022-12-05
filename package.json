@@ -12,7 +12,8 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev": "turbo run dev --parallel",
+    "dev:react": "turbo run dev --parallel --scope=api --scope=react",
+    "dev:javascript": "turbo run dev --parallel --scope=api --scope=javascript",
     "format": "prettier --write .",
     "lint": "turbo run lint",
     "test": "turbo run test",

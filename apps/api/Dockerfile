@@ -1,5 +1,6 @@
-FROM node:alpine AS builder
+FROM node:lts-alpine AS builder
 RUN apk update
+RUN apk add --no-cache libc6-compat
 
 # Set working directory
 WORKDIR /app
@@ -8,24 +9,23 @@ COPY . .
 RUN turbo prune --scope=api --docker
 
 # Add lockfile and package.json's of isolated subworkspace
-FROM node:alpine AS installer
+FROM node:lts-alpine AS installer
 RUN apk update
+RUN apk add --no-cache libc6-compat
 
 
 WORKDIR /app
-ARG NPM_TOKEN  
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
 COPY --from=builder /app/out/full/ .
 COPY --from=builder /app/apps/api/.env .env
 COPY .gitignore .gitignore
-COPY .npmrc .npmrc
 COPY turbo.json turbo.json
 
 RUN yarn install
 RUN yarn turbo run build --filter=api...
 
-FROM node:alpine AS runner
+FROM node:lts-alpine AS runner
 WORKDIR /app
 
 # Don't run production as root

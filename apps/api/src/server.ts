@@ -5,9 +5,9 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import Portabl, { DIDCommGoalEnum, EnvType, IAuthResponse } from '@portabl/node';
-import { ICredentialSubject } from '@sphereon/pex';
+import Portabl, { EnvType, IAuthResponse, IKYCClaimsInput } from '@portabl/node';
 import MOCKED_CLAIMS from './mocks/claims';
+import MOCKED_NATIVE_USER_ID from './mocks/nativeUserId';
 
 const PORTABL_CLIENT_ID = process.env.PORTABL_CLIENT_ID;
 const PORTABL_CLIENT_SECRET = process.env.PORTABL_CLIENT_SECRET;
@@ -51,11 +51,14 @@ export const createServer = () => {
         const { accessToken } = req.body;
 
         // Make a request to get claims from internal APIs
-        const claims: ICredentialSubject = MOCKED_CLAIMS;
+        const claims: IKYCClaimsInput = MOCKED_CLAIMS;
+        // Make a request to get the native user id from internal APIs
+        const nativeUserId: string = MOCKED_NATIVE_USER_ID;
 
         await portablClient.createCredential({
           accessToken,
           claims,
+          nativeUserId,
         });
 
         return res.json({});
