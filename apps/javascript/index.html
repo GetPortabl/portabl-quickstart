@@ -27,18 +27,23 @@
     </div>
     <script type="text/javascript">
       const API_BASE_URL = window._env_.JS_APP_PUBLIC_API_HOST;
-      const PREPARE_BACKUP_ROUTE = '/prepare-backup';
-      const LOAD_BACKUP_DATA_ROUTE = '/load-backup-data';
-      const userId = 'USER_ID_OF_AUTHENTICATED_BANK_TRUST_USER';
+      console.log('API_BASE_URL', API_BASE_URL);
+
+      const AUTHENTICATE_BACKUP_SESSION_ROUTE = '/backup-sessions/authenticate';
+      const LOAD_DATA_TO_BACKUP_SESSION_ROUTE = '/backup-sessions/load-data';
+
+      // Apply a Native User ID of authenticated Bank Trust user here
+      const nativeUserId = 'NATIVE_USER_ID_OF_AUTHENTICATED_BANK_TRUST_USER';
+
       const initOpts = {
         prepareBackup: async () => {
-          const data = await fetch(`${API_BASE_URL}${PREPARE_BACKUP_ROUTE}`, { method: 'POST' });
+          const data = await fetch(`${API_BASE_URL}${AUTHENTICATE_BACKUP_SESSION_ROUTE}`, { method: 'POST' });
           const { accessToken } = await data.json();
 
           return { accessToken };
         },
         loadBackupData: ({ accessToken }) => {
-          const { data } = fetch(`${API_BASE_URL}${LOAD_BACKUP_DATA_ROUTE}`, {
+          const { data } = fetch(`${API_BASE_URL}${LOAD_DATA_TO_BACKUP_SESSION_ROUTE}`, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -46,7 +51,7 @@
             },
             body: JSON.stringify({
               accessToken,
-              userId,
+              nativeUserId,
             }),
           });
         },

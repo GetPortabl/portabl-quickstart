@@ -65,6 +65,7 @@ yarn dev:javascript
 #### React
 
 ```bash
+yarn build
 yarn dev:react
 ```
 

@@ -1,5 +1,4 @@
-const MOCKED_CLAIMS = {
-  type: 'vKYC', // its a type of the given node, but not a datapoint itself
+export const MOCKED_CLAIMS = {
   emailAddress: 'liz.lemon@30rock.com',
   phoneNumber: '+1',
   firstName: 'Liz',
@@ -9,7 +8,6 @@ const MOCKED_CLAIMS = {
   nationality: 'UNITED STATES OF AMERICA',
   socialSecurityNumber: '123-45-6789',
   registrationAddressDetails: {
-    type: 'RegistrationAddressDetails', // its a type of the given node, but not a datapoint itself
     country: 'USA',
     region: 'New York',
     postalCode: '10024',
@@ -17,5 +15,3 @@ const MOCKED_CLAIMS = {
     streetAddress: '168 Riverside Drive, APT 2F',
   },
 };
-
-export default MOCKED_CLAIMS;
