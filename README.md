@@ -8,21 +8,12 @@ Here you will find necessary steps and samples to get the app running on your ma
 
 ## Setup
 
-### Setting up Environment Variables for the sample **"web"** app
+### Setting up Environment Variables
 
-Create a `.env` file from `.env.example` in the web directory and fill out the environment variables.
-
-```bash
-cp apps/web/.env.example apps/web/.env
-
-```
-
-### Setting up Environment Variables for the sample **"api"** app
-
-Create a `.env` file from `.env.example` in the api directory and fill out the environment variables with respective values from https://console.getportabl.com/api-keys.
+Create a `.env` file from `.env.example` and fill out the environment variables.
 
 ```bash
-cp apps/api/.env.example apps/api/.env
+cp .env.example .env
 
 ```
 
