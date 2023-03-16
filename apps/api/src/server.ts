@@ -13,6 +13,8 @@ const PORTABL_CLIENT_ID = process.env.JS_APP_PUBLIC_PORTABL_CLIENT_ID;
 const PORTABL_CLIENT_SECRET = process.env.PORTABL_CLIENT_SECRET;
 const PORTABL_ENV = process.env.PORTABL_ENV;
 
+let ACCESS_TOKEN: string;
+
 if (typeof PORTABL_CLIENT_ID !== 'string') {
   throw new Error('No CLIENT_ID was provided in .env');
 }
@@ -29,31 +31,34 @@ export const createServer = () => {
     .use(urlencoded({ extended: true }))
     .use(json())
     .use(cors())
-    .get('/access-token', async (req, res, next) => {
-      try {
-        const response = await axios.post(`https://baoportabl-api.ngrok.io/api/v1/provider/data-sync/token`, {
-          grantType: 'client_credentials',
-          clientId: PORTABL_CLIENT_ID,
-          clientSecret: PORTABL_CLIENT_SECRET,
-          audience: 'https://dev-api.getportabl.com',
-          env: PORTABL_ENV,
-          correlationIdInput: 'abc123',
-          scope: [
-            'read:credential-manifests',
-            'create:didcomm-messages',
-            'update:didcomm-threads',
-            'create:verifiable-documents',
-          ].join(' '),
-        });
-        res.status(200).json({ accessToken: response.data.accessToken });
-      } catch (e) {
-        console.log('ERROR', e);
-        next(e);
+    .use(async (req, res, next) => {
+      if (!ACCESS_TOKEN) {
+        try {
+          const response = await axios.post(`https://baoportabl-api.ngrok.io/api/v1/provider/data-sync/token`, {
+            grantType: 'client_credentials',
+            clientId: PORTABL_CLIENT_ID,
+            clientSecret: PORTABL_CLIENT_SECRET,
+            audience: 'https://dev-api.getportabl.com',
+            env: PORTABL_ENV,
+            scope: [
+              'read:credential-manifests',
+              'create:didcomm-messages',
+              'update:didcomm-threads',
+              'create:verifiable-documents',
+            ].join(' '),
+          });
+
+          ACCESS_TOKEN = response.data.accessToken;
+          next();
+        } catch (e) {
+          console.log('ERROR', e);
+          next(e);
+        }
       }
+      next();
     })
     .post('/load-backup-data', async (req, res, next) => {
       try {
-        const accessToken = req.body.accessToken;
         // Make a request to get claims from internal APIs
         const claims = MOCKED_CLAIMS;
         // Make a request to get the native user id from internal APIs
@@ -67,12 +72,67 @@ export const createServer = () => {
           },
           {
             headers: {
-              authorization: `Bearer ${accessToken}`,
+              authorization: `Bearer ${ACCESS_TOKEN}`,
             },
           },
         );
 
+        setTimeout(async () => {
+          axios.post(
+            `https://baoportabl-api.ngrok.io/api/v1/provider/data-sync/start`,
+            {
+              correlationId: req.body.correlationId,
+            },
+            {
+              headers: {
+                authorization: `Bearer ${ACCESS_TOKEN}`,
+              },
+            },
+          );
+        }, 10000);
+
         return res.json({});
+      } catch (e) {
+        next(e);
+      }
+    })
+    .get('/data-profile', async (req, res, next) => {
+      try {
+        const { data } = await axios.get(`https://baoportabl-api.ngrok.io/api/v1/provider/data-profiles`, {
+          headers: {
+            authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        });
+
+        // Data Profiles will return an array of all your profiles. We want to retreive the latest one.
+        const latestdataProfile = data.dataProfiles?.[0];
+
+        // If there is no dataProfile we will error, since you can not perform sync without this configured.
+        if (!latestdataProfile) {
+          throw new Error('dataProfile must be configured');
+        }
+
+        return res.json(latestdataProfile);
+      } catch (e) {
+        next(e);
+      }
+    })
+    .post('/create-data-sync-invitation', async (req, res, next) => {
+      try {
+        const { data } = await axios.post(
+          `https://baoportabl-api.ngrok.io/api/v1/provider/data-sync/create-invitation`,
+          {
+            correlationId: req.body.correlationId,
+            nativeUserId: MOCKED_NATIVE_USER_ID,
+          },
+          {
+            headers: {
+              authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
+          },
+        );
+
+        return res.json(data);
       } catch (e) {
         next(e);
       }
