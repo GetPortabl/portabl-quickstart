@@ -1,18 +1,23 @@
 import { Auth0Provider } from '@auth0/auth0-react';
 import { MantineProvider } from '@mantine/core';
 import SyncButton from './components/SyncButton';
+import defaultGenerateCorrelationId from './utils/default-generate-correlation-id.util';
 
 const AUTH0_DOMAIN = 'dev-auth.getportabl.com';
 const AUTH0_API_AUDIENCE = 'https://dev-api.getportabl.com';
 
 export default function Sync({
-  getAccessToken,
-  loadBackupData,
   clientId,
+  createDataSyncInvitation,
+  getDataProfile,
+  loadBackupData,
+  generateCorrelationId = defaultGenerateCorrelationId,
 }: {
-  getAccessToken: () => Promise<{ accessToken: string }>;
-  loadBackupData: ({ accessToken }: { accessToken: string }) => Promise<void>;
   clientId: string;
+  createDataSyncInvitation: ({ correlationId }: { correlationId: string }) => Promise<{ invitationUrl: string }>;
+  getDataProfile: () => Promise<{ datapoints: Array<{ kind: string }> }>;
+  loadBackupData: ({ correlationId }: { correlationId: string }) => Promise<void>;
+  generateCorrelationId?: () => string;
 }) {
   return (
     <MantineProvider>
@@ -26,7 +31,12 @@ export default function Sync({
           audience: AUTH0_API_AUDIENCE,
         }}
       >
-        <SyncButton getAccessToken={getAccessToken} loadBackupData={loadBackupData} />
+        <SyncButton
+          createDataSyncInvitation={createDataSyncInvitation}
+          loadBackupData={loadBackupData}
+          getDataProfile={getDataProfile}
+          generateCorrelationId={generateCorrelationId}
+        />
       </Auth0Provider>
     </MantineProvider>
   );

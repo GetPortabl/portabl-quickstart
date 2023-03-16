@@ -2,47 +2,46 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Button, Modal, Text } from '@mantine/core';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import getDataProfilesRequest from '../../requests/getDataProfilesRequest';
+import handleDataSyncInvitation from '../../requests/handleDataSyncInvitation';
 
 const PASSPORT_URL_ORIGIN = 'https://local-my.getportabl.com:3004';
 const PASSPORT_URL = 'https://local-my.getportabl.com:3004/sync';
 
 export default function SyncButton({
-  getAccessToken,
+  createDataSyncInvitation,
+  generateCorrelationId,
+  getDataProfile,
   loadBackupData,
 }: {
-  getAccessToken: () => Promise<{ accessToken: string }>;
-  loadBackupData: ({ accessToken }: { accessToken: string }) => Promise<void>;
+  createDataSyncInvitation: ({ correlationId }: { correlationId: string }) => Promise<{ invitationUrl: string }>;
+  generateCorrelationId: () => string;
+  getDataProfile: () => Promise<{ datapoints: Array<{ kind: string }> }>;
+  loadBackupData: ({ correlationId }: { correlationId: string }) => Promise<void>;
 }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [isSynced, setIsSynced] = useState(false);
-  const { isAuthenticated, loginWithPopup, logout } = useAuth0();
+  const { isAuthenticated, loginWithPopup, logout, getAccessTokenSilently } = useAuth0();
   const iframeRef = useCallback((node: HTMLIFrameElement) => setIframeElement(node), []);
   const [iframeElement, setIframeElement] = useState<HTMLIFrameElement | null>(null);
   const syncWrapperRef = useRef<HTMLDivElement>(null);
-  const [dataProfiles, setDataprofiles] = useState<any>(null);
+  const [dataProfile, setdataProfile] = useState<any>(null);
   const [isPassportReady, setIsPassportReady] = useState(false);
   const [providerAccessToken, setProviderAccessToken] = useState<string>();
 
   const handleSync = async () => {
     open();
-    const { accessToken } = await getAccessToken();
-    setProviderAccessToken(accessToken);
 
-    const [dataprofilesResponse] = await Promise.all([
-      getDataProfilesRequest(accessToken),
-      loadBackupData({ accessToken }),
-    ]);
+    const dataProfileResponse = await getDataProfile();
 
-    const { dataProfiles } = dataprofilesResponse;
-
-    setDataprofiles(dataProfiles);
+    setdataProfile(dataProfileResponse);
     loginWithPopup();
   };
 
   useEffect(() => {
-    if (isAuthenticated && isPassportReady && iframeElement && dataProfiles) {
-      const formattedDatapoints = dataProfiles?.[0].datapoints.map((x: any) => x.kind);
+    console.debug({ isAuthenticated, isPassportReady, iframeElement, dataProfile });
+    if (isAuthenticated && isPassportReady && iframeElement && dataProfile) {
+      console.debug('Requesting Ack');
+      const formattedDatapoints = dataProfile?.datapoints.map((x: any) => x.kind);
 
       iframeElement.contentWindow?.postMessage(
         {
@@ -56,26 +55,39 @@ export default function SyncButton({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    JSON.stringify(dataProfiles),
+    JSON.stringify(dataProfile),
     isAuthenticated,
     isPassportReady,
     iframeElement,
   ]);
 
-  const handleAckEvent = (event: MessageEvent<{ action: string }>) => {
-    if (event?.origin === PASSPORT_URL_ORIGIN && event.data.action === 'sync:acked') {
-      setIsSynced(true);
-    }
-  };
+  const handleAckEvent = useCallback(
+    async (event: MessageEvent<{ action: string }>) => {
+      if (event?.origin === PASSPORT_URL_ORIGIN && event.data.action === 'sync:acked') {
+        console.debug('Receiving Ack');
+        const correlationId = generateCorrelationId();
+        const accessToken = await getAccessTokenSilently();
+        console.debug('Access Token:', accessToken);
+
+        // loadBackupData is asynchronous action that does not need to be awaited.
+        // We do not care about the response of this event.
+        await loadBackupData({ correlationId });
+        const { invitationUrl } = await createDataSyncInvitation({ correlationId });
+        await handleDataSyncInvitation({ accessToken, invitationUrl });
+        setIsSynced(true);
+      }
+    },
+    [generateCorrelationId, createDataSyncInvitation, loadBackupData, getAccessTokenSilently],
+  );
 
   const handlePassportReadyEvent = (event: MessageEvent<{ action: string }>) => {
     if (event.data.action === 'sync:passport-ready') {
+      console.debug('Passport Ready');
       setIsPassportReady(true);
-
-      // CREATE DIDCOMM INVITATION
     }
 
     if (event.data.action === 'sync:passport-closed') {
+      console.debug('Passport Closed');
       setIsPassportReady(false);
     }
   };
@@ -88,7 +100,7 @@ export default function SyncButton({
 
   useEffect(() => {
     let ackListener: any;
-    if (isAuthenticated && dataProfiles) {
+    if (isAuthenticated && dataProfile) {
       ackListener = window.addEventListener('message', handleAckEvent);
     }
 
@@ -97,14 +109,14 @@ export default function SyncButton({
         window.removeEventListener('message', handleAckEvent);
       }
     };
-  }, [dataProfiles, isAuthenticated]);
+  }, [dataProfile, isAuthenticated, handleAckEvent]);
 
   useEffect(() => {
     window.addEventListener('message', handlePassportReadyEvent);
     return () => {
       window.removeEventListener('message', handlePassportReadyEvent);
     };
-  }, [dataProfiles, isAuthenticated]);
+  }, [dataProfile, isAuthenticated]);
 
   return (
     <div>
