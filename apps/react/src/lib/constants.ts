@@ -6,7 +6,9 @@ export const DATA_SYNC_TOKEN_ROUTE = `${DATA_SYNC_ROUTE}/token`;
 export const DATA_SYNC_SESSIONS_ROUTE = `${DATA_SYNC_ROUTE}/sessions`;
 export const DATA_SYNC_LOAD_DATA_ROUTE = `${DATA_SYNC_ROUTE}/load-data`;
 export const ACCESS_TOKEN = '/access-token';
+export const CREATE_DATA_SYNC_INVITATION = '/create-data-sync-invitation';
 export const LOAD_BACKUP_DATA = '/load-backup-data';
+export const GET_DATA_PROFILE = '/data-profile';
 
 // tenant
 export const TENANT_ID_PLACEHOLDER = '<tenant-id>';
