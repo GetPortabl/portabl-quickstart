@@ -1,5 +1,5 @@
 const MOCKED_CLAIMS = {
-  type: 'vKYC', // its a type of the given node, but not a datapoint itself
+  type: 'FinancialCredential', // its a type of the given node, but not a datapoint itself
   emailAddress: 'liz.lemon@30rock.com',
   phoneNumber: '+1',
   firstName: 'Liz',

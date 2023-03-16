@@ -1,27 +1,18 @@
-import BackupWithPortabl from '@portabl/react-backup-with-portabl';
-
-import usePrepareBackup from '../lib/hooks/usePrepareBackup';
-import useLoadBackupData from '../lib/hooks/useLoadBackupData';
+import SyncWithPortabl from 'sync-with-portabl';
 import styles from './index.module.css';
+import getAccessToken from '../lib/requests/getAccessTokenRequest';
+import loadBackupData from '../lib/requests/loadBackupDataRequest';
 
 export default function Web() {
-  const { mutateAsync: prepareBackupAsync } = usePrepareBackup();
-  const { mutateAsync: loadBackupDataAsync } = useLoadBackupData();
-
   const userId: string = 'USER_ID_OF_AUTHENTICATED_BANK_TRUST_USER';
 
   return (
     <div className={styles['backup-wrapper']}>
       <h4>Portabl Backup - React</h4>
-      <BackupWithPortabl
-        prepareBackup={() => prepareBackupAsync()}
-        loadBackupData={({ accessToken }) => {
-          loadBackupDataAsync({
-            accessToken,
-            userId,
-          });
-        }}
-        redirectUri="https://getportabl.com"
+      <SyncWithPortabl
+        getAccessToken={getAccessToken}
+        loadBackupData={({ accessToken }) => loadBackupData({ accessToken, userId })}
+        clientId={process.env.JS_APP_PUBLIC_PORTABL_CLIENT_ID || ''}
       />
     </div>
   );

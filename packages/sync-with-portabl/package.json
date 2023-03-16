@@ -1,0 +1,31 @@
+{
+  "name": "sync-with-portabl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@mantine/core": "^6.0.2",
+    "@mantine/hooks": "^6.0.2",
+    "@mantine/modals": "^6.0.2"
+  },
+  "devDependencies": {
+    "tsconfig": "*",
+    "typescript": "^4.9.5",
+    "@auth0/auth0-react": "^2.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": "^16.11.0 || ^17 || ^18",
+    "react-dom": "^16.11.0 || ^17 || ^18"
+  }
+}
