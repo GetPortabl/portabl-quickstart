@@ -26,7 +26,6 @@ export default function SyncButton({
   const syncWrapperRef = useRef<HTMLDivElement>(null);
   const [dataProfile, setdataProfile] = useState<any>(null);
   const [isPassportReady, setIsPassportReady] = useState(false);
-  const [providerAccessToken, setProviderAccessToken] = useState<string>();
 
   const handleSync = async () => {
     open();
@@ -38,9 +37,7 @@ export default function SyncButton({
   };
 
   useEffect(() => {
-    console.debug({ isAuthenticated, isPassportReady, iframeElement, dataProfile });
     if (isAuthenticated && isPassportReady && iframeElement && dataProfile) {
-      console.debug('Requesting Ack');
       const formattedDatapoints = dataProfile?.datapoints.map((x: any) => x.kind);
 
       iframeElement.contentWindow?.postMessage(
@@ -64,10 +61,8 @@ export default function SyncButton({
   const handleAckEvent = useCallback(
     async (event: MessageEvent<{ action: string }>) => {
       if (event?.origin === PASSPORT_URL_ORIGIN && event.data.action === 'sync:acked') {
-        console.debug('Receiving Ack');
         const correlationId = generateCorrelationId();
         const accessToken = await getAccessTokenSilently();
-        console.debug('Access Token:', accessToken);
 
         // loadBackupData is asynchronous action that does not need to be awaited.
         // We do not care about the response of this event.
@@ -82,12 +77,10 @@ export default function SyncButton({
 
   const handlePassportReadyEvent = (event: MessageEvent<{ action: string }>) => {
     if (event.data.action === 'sync:passport-ready') {
-      console.debug('Passport Ready');
       setIsPassportReady(true);
     }
 
     if (event.data.action === 'sync:passport-closed') {
-      console.debug('Passport Closed');
       setIsPassportReady(false);
     }
   };

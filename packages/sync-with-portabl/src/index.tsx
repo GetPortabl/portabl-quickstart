@@ -25,7 +25,6 @@ export default function Sync({
         cacheLocation="localstorage"
         domain={AUTH0_DOMAIN}
         clientId={clientId}
-        // onRedirectCallback={onRedirectCallback}
         useRefreshTokens
         authorizationParams={{
           audience: AUTH0_API_AUDIENCE,

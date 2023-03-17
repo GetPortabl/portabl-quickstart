@@ -7,7 +7,6 @@ export type LoadBackupDataRequestArgsType = {
 
 const loadBackupData = async ({ correlationId }: { correlationId: string }): Promise<void> => {
   const { data }: AxiosResponse = await axios.post(`${API_BASE_URL}${LOAD_BACKUP_DATA}`, { correlationId });
-
   return data;
 };
 
