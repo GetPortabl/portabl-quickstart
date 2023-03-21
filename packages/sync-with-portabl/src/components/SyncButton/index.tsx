@@ -33,7 +33,9 @@ export default function SyncButton({
     const dataProfileResponse = await getDataProfile();
 
     setdataProfile(dataProfileResponse);
-    loginWithPopup();
+    if (!isAuthenticated) {
+      loginWithPopup();
+    }
   };
 
   useEffect(() => {

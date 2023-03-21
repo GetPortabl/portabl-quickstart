@@ -12,7 +12,7 @@ export default function Web() {
         loadBackupData={({ correlationId }) => loadBackupData({ correlationId })}
         getDataProfile={() => getDataProfile()}
         createDataSyncInvitation={({ correlationId }) => createDataSyncInvitation({ correlationId })}
-        clientId={process.env.JS_APP_PUBLIC_PORTABL_CLIENT_ID || ''}
+        clientId={process.env.JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID || ''}
       />
     </div>
   );

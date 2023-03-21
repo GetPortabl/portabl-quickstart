@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_HANDLE_INVITATION = 'https://baoportabl-api.ngrok.io/api/v1/consumer/data-sync/handle-invitation';
+const API_HANDLE_INVITATION = 'https://portabl-ben-api.ngrok.io/api/v1/consumer/data-sync/handle-invitation';
 
 const handleDataSyncInvitation = async ({
   accessToken,

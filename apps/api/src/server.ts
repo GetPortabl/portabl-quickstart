@@ -9,7 +9,7 @@ import axios from 'axios';
 import MOCKED_CLAIMS from './mocks/claims';
 import MOCKED_NATIVE_USER_ID from './mocks/nativeUserId';
 
-const PORTABL_CLIENT_ID = process.env.JS_APP_PUBLIC_PORTABL_CLIENT_ID;
+const PORTABL_CLIENT_ID = process.env.PORTABL_CLIENT_ID;
 const PORTABL_CLIENT_SECRET = process.env.PORTABL_CLIENT_SECRET;
 const PORTABL_ENV = process.env.PORTABL_ENV;
 
@@ -34,7 +34,7 @@ export const createServer = () => {
     .use(async (req, res, next) => {
       if (!ACCESS_TOKEN) {
         try {
-          const response = await axios.post(`https://baoportabl-api.ngrok.io/api/v1/provider/data-sync/token`, {
+          const response = await axios.post(`https://portabl-ben-api.ngrok.io/api/v1/provider/data-sync/token`, {
             grantType: 'client_credentials',
             clientId: PORTABL_CLIENT_ID,
             clientSecret: PORTABL_CLIENT_SECRET,
@@ -49,13 +49,15 @@ export const createServer = () => {
           });
 
           ACCESS_TOKEN = response.data.accessToken;
+          console.log(ACCESS_TOKEN);
           next();
         } catch (e) {
           console.log('ERROR', e);
           next(e);
         }
+      } else {
+        next();
       }
-      next();
     })
     .post('/load-backup-data', async (req, res, next) => {
       try {
@@ -65,7 +67,7 @@ export const createServer = () => {
         const nativeUserId: string = MOCKED_NATIVE_USER_ID;
 
         await axios.post(
-          `https://baoportabl-api.ngrok.io/api/v1/provider/data-sync/load-data`,
+          `https://portabl-ben-api.ngrok.io/api/v1/provider/data-sync/load-data`,
           {
             nativeUserId,
             claims,
@@ -77,20 +79,6 @@ export const createServer = () => {
           },
         );
 
-        setTimeout(async () => {
-          axios.post(
-            `https://baoportabl-api.ngrok.io/api/v1/provider/data-sync/start`,
-            {
-              correlationId: req.body.correlationId,
-            },
-            {
-              headers: {
-                authorization: `Bearer ${ACCESS_TOKEN}`,
-              },
-            },
-          );
-        }, 10000);
-
         return res.json({});
       } catch (e) {
         next(e);
@@ -98,7 +86,7 @@ export const createServer = () => {
     })
     .get('/data-profile', async (req, res, next) => {
       try {
-        const { data } = await axios.get(`https://baoportabl-api.ngrok.io/api/v1/provider/data-profiles`, {
+        const { data } = await axios.get(`https://portabl-ben-api.ngrok.io/api/v1/provider/data-profiles`, {
           headers: {
             authorization: `Bearer ${ACCESS_TOKEN}`,
           },
@@ -120,9 +108,9 @@ export const createServer = () => {
     .post('/create-data-sync-invitation', async (req, res, next) => {
       try {
         const { data } = await axios.post(
-          `https://baoportabl-api.ngrok.io/api/v1/provider/data-sync/create-invitation`,
+          `https://portabl-ben-api.ngrok.io/api/v1/provider/data-sync/create-invitation`,
           {
-            correlationId: req.body.correlationId,
+            dataSyncSessionId: req.body.correlationId,
             nativeUserId: MOCKED_NATIVE_USER_ID,
           },
           {
@@ -131,6 +119,20 @@ export const createServer = () => {
             },
           },
         );
+
+        setTimeout(async () => {
+          axios.post(
+            `https://portabl-ben-api.ngrok.io/api/v1/provider/data-sync/start`,
+            {
+              dataSyncSessionId: req.body.correlationId,
+            },
+            {
+              headers: {
+                authorization: `Bearer ${ACCESS_TOKEN}`,
+              },
+            },
+          );
+        }, 10000);
 
         return res.json(data);
       } catch (e) {
