@@ -9,9 +9,9 @@ import axios from 'axios';
 import MOCKED_CLAIMS from './mocks/claims';
 import MOCKED_NATIVE_USER_ID from './mocks/nativeUserId';
 
+const PORTABL_API_DOMAIN = process.env.PORTABL_API_DOMAIN;
 const PORTABL_CLIENT_ID = process.env.PORTABL_CLIENT_ID;
 const PORTABL_CLIENT_SECRET = process.env.PORTABL_CLIENT_SECRET;
-const PORTABL_ENV = process.env.PORTABL_ENV;
 
 let ACCESS_TOKEN: string;
 
@@ -22,6 +22,8 @@ if (typeof PORTABL_CLIENT_ID !== 'string') {
 if (typeof PORTABL_CLIENT_SECRET !== 'string') {
   throw new Error('No CLIENT_SECRET was provided in .env');
 }
+
+const baseUrl = `${PORTABL_API_DOMAIN}/api/v1`;
 
 export const createServer = () => {
   const app = express();
@@ -34,18 +36,9 @@ export const createServer = () => {
     .use(async (req, res, next) => {
       if (!ACCESS_TOKEN) {
         try {
-          const response = await axios.post(`https://portabl-ben-api.ngrok.io/api/v1/provider/data-sync/token`, {
-            grantType: 'client_credentials',
+          const response = await axios.post(`${baseUrl}/provider/data-sync/token`, {
             clientId: PORTABL_CLIENT_ID,
             clientSecret: PORTABL_CLIENT_SECRET,
-            audience: 'https://dev-api.getportabl.com',
-            env: PORTABL_ENV,
-            scope: [
-              'read:credential-manifests',
-              'create:didcomm-messages',
-              'update:didcomm-threads',
-              'create:verifiable-documents',
-            ].join(' '),
           });
 
           ACCESS_TOKEN = response.data.accessToken;
@@ -67,7 +60,7 @@ export const createServer = () => {
         const nativeUserId: string = MOCKED_NATIVE_USER_ID;
 
         await axios.post(
-          `https://portabl-ben-api.ngrok.io/api/v1/provider/data-sync/load-data`,
+          `${baseUrl}/provider/data-sync/load-data`,
           {
             nativeUserId,
             claims,
@@ -86,7 +79,7 @@ export const createServer = () => {
     })
     .get('/data-profile', async (req, res, next) => {
       try {
-        const { data } = await axios.get(`https://portabl-ben-api.ngrok.io/api/v1/provider/data-profiles`, {
+        const { data } = await axios.get(`${baseUrl}/provider/data-profiles`, {
           headers: {
             authorization: `Bearer ${ACCESS_TOKEN}`,
           },
@@ -108,7 +101,7 @@ export const createServer = () => {
     .post('/create-data-sync-invitation', async (req, res, next) => {
       try {
         const { data } = await axios.post(
-          `https://portabl-ben-api.ngrok.io/api/v1/provider/data-sync/create-invitation`,
+          `${baseUrl}/provider/data-sync/create-invitation`,
           {
             dataSyncSessionId: req.body.correlationId,
             nativeUserId: MOCKED_NATIVE_USER_ID,
@@ -122,7 +115,7 @@ export const createServer = () => {
 
         setTimeout(async () => {
           axios.post(
-            `https://portabl-ben-api.ngrok.io/api/v1/provider/data-sync/start`,
+            `${baseUrl}/provider/data-sync/start`,
             {
               dataSyncSessionId: req.body.correlationId,
             },
