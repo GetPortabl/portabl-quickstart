@@ -13,15 +13,14 @@
     "@mantine/core": "^5.2.3",
     "@mantine/form": "^5.2.3",
     "@mantine/hooks": "^5.2.3",
-    "@portabl/react-backup-with-portabl": "^1.0.1",
+    "@portabl/react-sync-with-portabl": "^1.0.0",
     "@tanstack/react-query": "latest",
     "axios": "^0.27.2",
     "jotai": "^1.8.0",
     "local-ssl-proxy": "^2.0.5",
     "next": "^13.2.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sync-with-portabl": "*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
