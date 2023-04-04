@@ -24,7 +24,7 @@ if (typeof PORTABL_CLIENT_SECRET !== 'string') {
 
 const baseUrl = `${PORTABL_API_DOMAIN}/api/v1`;
 
-const getNativeUserIdFromRequest = (req: Request) => {
+const getUserIdFromRequest = (req: Request) => {
   const auth = req.headers.authorization;
   if (!auth) {
     throw new Error('Unauthorized');
@@ -61,28 +61,40 @@ export const createServer = () => {
         next();
       }
     })
-    .get('/user-settings', async (req, res, next) => {
+    .get('/sync-prereqs', async (req, res, next) => {
       try {
-        const nativeUserId = getNativeUserIdFromRequest(req);
-        const { data } = await axios.get(`${baseUrl}/provider/users/${nativeUserId}/settings`, {
+        const userId = getUserIdFromRequest(req);
+        const {
+          data: { settings },
+        } = await axios.get(`${baseUrl}/provider/users/${userId}/settings`, {
           headers: {
             authorization: `Bearer ${ACCESS_TOKEN}`,
           },
         });
 
-        return res.json(data);
+        const {
+          data: { datapoints },
+        } = await axios.get(`${baseUrl}/provider/data-profiles/latest/datapoints`, {
+          headers: {
+            authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        });
+
+        return res.json({
+          isSyncOn: settings?.isSyncOn || false,
+          datapoints,
+        });
       } catch (e) {
         next(e);
       }
     })
-    .put('/user-settings', async (req, res, next) => {
+    .post('/user-consent', async (req, res, next) => {
       try {
-        const nativeUserId = getNativeUserIdFromRequest(req);
-        const { isSyncOn } = req.body;
-        const { data } = await axios.put(
-          `${baseUrl}/provider/users/${nativeUserId}/settings`,
+        const userId = getUserIdFromRequest(req);
+        await axios.put(
+          `${baseUrl}/provider/users/${userId}/settings`,
           {
-            isSyncOn,
+            isSyncOn: true,
           },
           {
             headers: {
@@ -91,42 +103,12 @@ export const createServer = () => {
           },
         );
 
-        return res.json(data);
-      } catch (e) {
-        next(e);
-      }
-    })
-    .get('/data-profile', async (req, res, next) => {
-      try {
-        const { data } = await axios.get(`${baseUrl}/provider/data-profiles`, {
-          headers: {
-            authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
-        });
-
-        // Data Profiles will return an array of all your profiles. We want to retreive the latest one.
-        const latestdataProfile = data.dataProfiles?.[0];
-
-        // If there is no dataProfile we will error, since you can not perform sync without this configured.
-        if (!latestdataProfile) {
-          throw new Error('dataProfile must be configured');
-        }
-
-        return res.json(latestdataProfile);
-      } catch (e) {
-        next(e);
-      }
-    })
-    .post('/update-user-datapoints', async (req, res, next) => {
-      try {
-        const nativeUserId = getNativeUserIdFromRequest(req);
-
         // Make a request to get claims from internal APIs
         const datapoints = MOCKED_DATAPOINTS;
 
         // Make a request to get the native user id from internal APIs
         await axios.put(
-          `${baseUrl}/provider/users/${nativeUserId}/datapoints`,
+          `${baseUrl}/provider/users/${userId}/datapoints`,
           {
             datapoints,
           },
@@ -137,17 +119,8 @@ export const createServer = () => {
           },
         );
 
-        return res.json({});
-      } catch (e) {
-        next(e);
-      }
-    })
-    .post('/create-sync-session', async (req, res, next) => {
-      try {
-        const nativeUserId = getNativeUserIdFromRequest(req);
-
         const { data } = await axios.post(
-          `${baseUrl}/provider/users/${nativeUserId}/sync-sessions`,
+          `${baseUrl}/provider/users/${userId}/sync-sessions`,
           {},
           {
             headers: {
@@ -158,15 +131,15 @@ export const createServer = () => {
 
         const { syncSessionId } = data;
 
-        setTimeout(async () => {
+        async () => {
           axios.post(`${baseUrl}/provider/sync-sessions/${syncSessionId}/start`, {
             headers: {
               authorization: `Bearer ${ACCESS_TOKEN}`,
             },
           });
-        }, 10000);
+        };
 
-        return res.json(data);
+        return res.json({});
       } catch (e) {
         next(e);
       }
