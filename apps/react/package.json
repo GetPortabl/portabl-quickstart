@@ -13,7 +13,6 @@
     "@mantine/core": "^5.2.3",
     "@mantine/form": "^5.2.3",
     "@mantine/hooks": "^5.2.3",
-    "@portabl/react-sync-with-portabl": "^1.0.0",
     "@tanstack/react-query": "latest",
     "axios": "^0.27.2",
     "jotai": "^1.8.0",

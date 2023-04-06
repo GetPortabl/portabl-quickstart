@@ -45,7 +45,7 @@ export const createServer = () => {
     .use(async (req, res, next) => {
       if (!ACCESS_TOKEN) {
         try {
-          const response = await axios.post(`${baseUrl}/provider/token`, {
+          const response = await axios.post(`${baseUrl}/provider/data-sync/token`, {
             clientId: PORTABL_CLIENT_ID,
             clientSecret: PORTABL_CLIENT_SECRET,
           });
