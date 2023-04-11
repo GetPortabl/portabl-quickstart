@@ -84,10 +84,8 @@ export const createServer = () => {
           },
         });
 
-        // Data Profiles will return an array of all your profiles. We want to retreive the latest one.
         const { datapoints } = data;
 
-        // If there is no dataProfile we will error, since you can not perform sync without this configured.
         if (!datapoints) {
           throw new Error('dataProfile must be configured');
         }
