@@ -32,10 +32,12 @@
       <h4>Portabl Backup - Vanilla JS</h4>
       <div id="portabl-sync-root"></div>
     </div>
-    <script type="text/javascript">
+    <script type="module">
+      import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+
       // constants
       const API_BASE_URL = `http://localhost:3001`;
-      const MOCK_USER_ID = `04cb2949-eab9-490b-9cf5-4b84f704ea60`;
+      const MOCK_USER_ID = uuidv4();
       const CLIENT_ID = window._env_.JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID;
       const USER_CONSENT = '/user-consent';
 
@@ -46,14 +48,11 @@
       // init Portabl
       async function initPortabl() {
         await Portabl.createSyncWithPortabl({
-          env: 'local',
           envOverride: {
-            local: {
-              domain: 'https://dev-auth.getportabl.com',
-              audience: 'https://dev-api.getportabl.com',
-              passportUrl: 'https://local-my.getportabl.com:3004',
-              syncAcceptUrl: 'https://portabl-bao-api.ngrok.io/api/v1/consumer/sync/accept',
-            },
+            domain: 'https://dev-auth.getportabl.com',
+            audience: 'https://dev-api.getportabl.com',
+            passportUrl: 'https://local-my.getportabl.com:3004',
+            syncAcceptUrl: 'https://portabl-bao-api.ngrok.io/api/v1/consumer/sync/accept',
           },
           rootSelector: '#portabl-sync-root',
           clientId: CLIENT_ID,
