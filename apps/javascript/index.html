@@ -9,6 +9,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <style>
       body {
         margin: 0;
@@ -23,60 +24,33 @@
         height: 100vh;
         margin: 0 auto;
         font-family: system-ui, sans-serif;
-        text-align: center;
+        text-align: left;
+      }
+
+      .user-id-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        margin-bottom: 40px;
+      }
+
+      #logout-button {
+        display: none;
       }
     </style>
   </head>
   <body>
     <div class="backup-wrapper">
+      <div class="user-id-wrapper">
+        <div>Generate new user for testing demonstration</div>
+        <button id="logout-button" onclick="window.handleLogout()">Logout</button>
+        <button onclick="window.generateNewUserId()">Generate</button>
+      </div>
+
       <h4>Portabl Backup - Vanilla JS</h4>
       <div id="portabl-sync-root"></div>
     </div>
-    <script type="module">
-      import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
-
-      // constants
-      const API_BASE_URL = `http://localhost:3001`;
-      const MOCK_USER_ID = uuidv4();
-      const CLIENT_ID = window._env_.JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID;
-      const USER_CONSENT = '/user-consent';
-
-      const MOCK_HEADERS_WITH_AUTH = {
-        Authorization: `Basic ${window.btoa(MOCK_USER_ID)}`,
-      };
-
-      // init Portabl
-      async function initPortabl() {
-        await Portabl.createSyncWithPortabl({
-          envOverride: {
-            domain: 'https://dev-auth.getportabl.com',
-            audience: 'https://dev-api.getportabl.com',
-            passportUrl: 'https://local-my.getportabl.com:3004',
-            syncAcceptUrl: 'https://portabl-bao-api.ngrok.io/api/v1/consumer/sync/accept',
-          },
-          rootSelector: '#portabl-sync-root',
-          clientId: CLIENT_ID,
-          getPrereqs: async () => {
-            const { data } = await axios.get(`${API_BASE_URL}/sync-prereqs`, {
-              headers: MOCK_HEADERS_WITH_AUTH,
-            });
-            return data;
-          },
-          onUserConsent: async () => {
-            const { data } = await axios.post(
-              `${API_BASE_URL}${USER_CONSENT}`,
-              {},
-              {
-                headers: MOCK_HEADERS_WITH_AUTH,
-              },
-            );
-
-            return data.invitationUrl;
-          },
-        });
-      }
-
-      initPortabl();
-    </script>
+    <script type="module" src="./src/portabl.js"></script>
+    <script type="module" src="./src/auth0.js"></script>
   </body>
 </html>
