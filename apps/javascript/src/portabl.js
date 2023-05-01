@@ -9,7 +9,7 @@ const SYNC_ACCEPT_URL = window._env_.JS_APP_PUBLIC_SYNC_ACCEPT_URL;
 const USER_CONSENT = '/user-consent';
 const SYNC_PREREQS = '/sync-prereqs';
 
-// used for playground purposes only
+// MOCK_USER_ID should be a unique user id to identify users within the Portabl system
 let MOCK_USER_ID = localStorage.getItem('MOCK_USER_ID');
 if (!MOCK_USER_ID) {
   MOCK_USER_ID = uuidv4();
@@ -18,12 +18,6 @@ if (!MOCK_USER_ID) {
 
 async function initPortabl(mockUserId) {
   let MOCK_HEADERS_WITH_AUTH = { Authorization: `Basic ${window.btoa(mockUserId)}` };
-
-  // when user generates a new user id, clearing the previous instance for playground purposes
-  const rootNode = document.querySelector('#portabl-sync-root');
-  if (rootNode) {
-    rootNode.innerHTML = '';
-  }
 
   await Portabl.createSyncWithPortabl({
     envOverride: {
@@ -53,7 +47,6 @@ async function initPortabl(mockUserId) {
     },
   });
 
-  // used to reset the user id for playground purposes only
   window.generateNewUserId = async function () {
     const newMockUserId = uuidv4();
     localStorage.setItem('MOCK_USER_ID', newMockUserId);
