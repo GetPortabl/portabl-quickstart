@@ -2,7 +2,6 @@
 const CLIENT_ID = window._env_.JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID;
 const DOMAIN = window._env_.JS_APP_AUTH0_DOMAIN;
 const AUDIENCE = window._env_.JS_APP_AUTH0_API_AUDIENCE;
-const LOGOUT_REDIRECT_URL = window._env_.JS_APP_LOGOUT_REDIRECT_URL;
 
 let auth0Client;
 
