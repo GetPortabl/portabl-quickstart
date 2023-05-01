@@ -1,13 +1,9 @@
-const withTM = require('next-transpile-modules')();
 const path = require('path');
 
-module.exports = withTM({
+module.exports = {
   reactStrictMode: true,
-  output: 'standalone',
-  experimental: {
-    outputFileTracingRoot: path.join(__dirname, '../../'),
-  },
   env: {
     JS_APP_PUBLIC_API_HOST: process.env.JS_APP_PUBLIC_API_HOST,
+    JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID: process.env.JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID,
   },
-});
+};

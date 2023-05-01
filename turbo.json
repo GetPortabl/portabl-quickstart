@@ -3,7 +3,7 @@
     "build": {
       "outputs": ["dist/**", ".next/**", "public/dist/**"],
       "dependsOn": ["^build"],
-      "env": ["JS_APP_PUBLIC_API_HOST"]
+      "env": ["JS_APP_PUBLIC_API_HOST", "JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID"]
     },
     "test": {
       "outputs": ["coverage/**"],
