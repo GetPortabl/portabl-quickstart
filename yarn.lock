@@ -870,10 +870,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@portabl/js-sync-with-portabl@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.1.tgz#059b1f2c1dead59126a21a03bee348482cd27aab"
-  integrity sha512-FqnCZ+6n7zLxB8Ir3vPEPuLODovi915ohETZItGQV2Pj+ZwjjG+BYixD/l6KRy/eLVVaXFdM6TnjfHPLR49viQ==
+"@portabl/js-sync-with-portabl@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.2.tgz#97ba7c1a864a64ff58cb78dd4eb91a5e69e3b30f"
+  integrity sha512-8YCsz8vPYvohLnVgnm9j8oMuYyrAYzNrenDCJfaciVfbuzSIANuewUmITIOHinBULKq1QvxT/CmJ+VuaFPqBsw==
   dependencies:
     "@auth0/auth0-spa-js" "^2.0.4"
     jwt-decode "^3.1.2"

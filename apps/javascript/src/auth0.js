@@ -33,7 +33,7 @@ async function updateButton() {
 
 window.handleLogout = async function () {
   if (auth0Client) {
-    auth0Client.logout();
+    await auth0Client.logout();
     updateButton();
   }
 };
