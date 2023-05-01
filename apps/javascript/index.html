@@ -9,7 +9,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <style>
       body {
         margin: 0;
@@ -33,17 +32,12 @@
         row-gap: 10px;
         margin-bottom: 40px;
       }
-
-      #logout-button {
-        display: none;
-      }
     </style>
   </head>
   <body>
     <div class="backup-wrapper">
       <div class="user-id-wrapper">
         <div>Generate new user for testing demonstration</div>
-        <button id="logout-button" onclick="window.handleLogout()">Logout</button>
         <button onclick="window.generateNewUserId()">Generate</button>
       </div>
 
@@ -51,6 +45,5 @@
       <div id="portabl-sync-root"></div>
     </div>
     <script type="module" src="./src/portabl.js"></script>
-    <script type="module" src="./src/auth0.js"></script>
   </body>
 </html>
