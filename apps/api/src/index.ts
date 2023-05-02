@@ -1,5 +1,5 @@
 import { createServer } from './server';
-import { log } from 'logger';
+import { log } from './utils/logger';
 
 const port = process.env.PORT || 3001;
 const server = createServer();
