@@ -1,8 +1,9 @@
 <html>
   <head>
     <title>node.js http server</title>
-    <script src="./env-config.js"></script>
-    <script src="./node_modules/@portabl/js-sync-with-portabl/dist/index.umd.js"></script>
+    <script src="./dist/env.js"></script>
+    <script src="./dist/index.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
       integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
@@ -23,60 +24,27 @@
         height: 100vh;
         margin: 0 auto;
         font-family: system-ui, sans-serif;
-        text-align: center;
+        text-align: left;
+      }
+
+      .user-id-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        margin-bottom: 40px;
       }
     </style>
   </head>
   <body>
     <div class="backup-wrapper">
+      <div class="user-id-wrapper">
+        <div>Generate new user for testing demonstration</div>
+        <button id="generate-new-user">Generate</button>
+      </div>
+
       <h4>Portabl Backup - Vanilla JS</h4>
       <div id="portabl-sync-root"></div>
     </div>
-    <script type="module">
-      import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
-
-      // constants
-      const API_BASE_URL = `http://localhost:3001`;
-      const MOCK_USER_ID = uuidv4();
-      const CLIENT_ID = window._env_.JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID;
-      const USER_CONSENT = '/user-consent';
-
-      const MOCK_HEADERS_WITH_AUTH = {
-        Authorization: `Basic ${window.btoa(MOCK_USER_ID)}`,
-      };
-
-      // init Portabl
-      async function initPortabl() {
-        await Portabl.createSyncWithPortabl({
-          envOverride: {
-            domain: 'https://dev-auth.getportabl.com',
-            audience: 'https://dev-api.getportabl.com',
-            passportUrl: 'https://local-my.getportabl.com:3004',
-            syncAcceptUrl: 'https://portabl-bao-api.ngrok.io/api/v1/consumer/sync/accept',
-          },
-          rootSelector: '#portabl-sync-root',
-          clientId: CLIENT_ID,
-          getPrereqs: async () => {
-            const { data } = await axios.get(`${API_BASE_URL}/sync-prereqs`, {
-              headers: MOCK_HEADERS_WITH_AUTH,
-            });
-            return data;
-          },
-          onUserConsent: async () => {
-            const { data } = await axios.post(
-              `${API_BASE_URL}${USER_CONSENT}`,
-              {},
-              {
-                headers: MOCK_HEADERS_WITH_AUTH,
-              },
-            );
-
-            return data.invitationUrl;
-          },
-        });
-      }
-
-      initPortabl();
-    </script>
+    <script type="module" src="./src/portabl.js"></script>
   </body>
 </html>

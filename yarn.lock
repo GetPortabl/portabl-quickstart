@@ -10,6 +10,11 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@auth0/auth0-spa-js@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-2.0.4.tgz#81f6b5d9f72617ed30ee53cdf27dcd7a216bf2da"
+  integrity sha512-NgD6Fkm5Xnbned1VjhEW8irm1/Y8AWtdSLexgLXNwwBVgfnYicCVBu8w75m2t+4QljXkTcI7IXVEFhVmxMuxaA==
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
@@ -865,19 +870,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@portabl/backup-common@*":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@portabl/backup-common/-/backup-common-1.0.1.tgz#c87ea1e8913360d4c350556f348f0827ab84513e"
-  integrity sha512-0vFs21tJvZnAPZDZfvGi2umlA7G7FHxJQ1SdaGdqhtyghvxmpnt6Yj5MMgeW4hl75oV8jAzkSdIdxOVoPYpO/A==
-  dependencies:
-    jwt-decode "^3.1.2"
-
-"@portabl/js-backup-with-portabl@0.0.3":
+"@portabl/js-sync-with-portabl@^0.0.3":
   version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@portabl/js-backup-with-portabl/-/js-backup-with-portabl-0.0.3.tgz#2cfd555bccda06862bfcc922abaca4c05b341d8a"
-  integrity sha512-YI0Q7oj0ohdM8jTxhN4dOgnlruBU5e4SCzJgnPyhK6Wtg9gN0BgvD2u2QQ1muz3lkcVE/Aa0r+8o4eME362WSg==
+  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.3.tgz#94c2b23375ae0787ac5e712893e52f10abf7bd92"
+  integrity sha512-VL77mcLZX/sIFwsT//hUw1BAbOH1zi89VvlhlC+sXRMAipd2z++N1wJ3XRmRX0e8J6ayD3fxAZ2NKc8D2ZF8qw==
   dependencies:
-    "@portabl/backup-common" "*"
+    "@auth0/auth0-spa-js" "^2.0.4"
+    jwt-decode "^3.1.2"
 
 "@portabl/node@^2.0.1":
   version "2.0.1"
