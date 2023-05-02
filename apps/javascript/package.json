@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "generate:env": "chmod +x ./scripts/env.sh && env-cmd -f ./.env --fallback ./scripts/env.sh",
-    "build": "yarn generate:env",
+    "generate:env": "env-cmd -f ./.env node ./scripts/env.js",
+    "build": "mkdir dist && node ./scripts/env.js && cp -r node_modules/@portabl/js-sync-with-portabl/dist/index.umd.js ./dist/index.umd.js",
     "dev": "yarn generate:env && http-server -p 3002",
     "lint": "eslint ."
   },
   "dependencies": {
-    "@portabl/js-sync-with-portabl": "^0.0.2"
+    "@portabl/js-sync-with-portabl": "^0.0.3"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",

@@ -1,8 +1,9 @@
 <html>
   <head>
     <title>node.js http server</title>
-    <script src="./env-config.js"></script>
-    <script src="./node_modules/@portabl/js-sync-with-portabl/dist/index.umd.js"></script>
+    <script src="./dist/env.js"></script>
+    <script src="./dist/index.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
       integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
@@ -38,7 +39,7 @@
     <div class="backup-wrapper">
       <div class="user-id-wrapper">
         <div>Generate new user for testing demonstration</div>
-        <button onclick="window.generateNewUserId()">Generate</button>
+        <button id="generate-new-user">Generate</button>
       </div>
 
       <h4>Portabl Backup - Vanilla JS</h4>
