@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
-
 const API_BASE_URL = window._env_.JS_APP_PUBLIC_API_HOST;
 const CLIENT_ID = window._env_.JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID;
 const DOMAIN = window._env_.JS_APP_AUTH0_DOMAIN;
@@ -12,7 +10,7 @@ const SYNC_PREREQS = '/sync-prereqs';
 // MOCK_USER_ID should be a unique user id to identify users within the Portabl system
 let MOCK_USER_ID = localStorage.getItem('MOCK_USER_ID');
 if (!MOCK_USER_ID) {
-  MOCK_USER_ID = uuidv4();
+  MOCK_USER_ID = uuid.v4();
   localStorage.setItem('MOCK_USER_ID', MOCK_USER_ID);
 }
 
@@ -46,13 +44,13 @@ async function initPortabl(mockUserId) {
       return data.invitationUrl;
     },
   });
-
-  window.generateNewUserId = async function () {
-    const newMockUserId = uuidv4();
-    localStorage.setItem('MOCK_USER_ID', newMockUserId);
-    MOCK_USER_ID = newMockUserId;
-    await initPortabl(MOCK_USER_ID);
-  };
 }
 
 await initPortabl(MOCK_USER_ID);
+
+document.getElementById('generate-new-user').addEventListener('click', async () => {
+  const newMockUserId = uuid.v4();
+  localStorage.setItem('MOCK_USER_ID', newMockUserId);
+  MOCK_USER_ID = newMockUserId;
+  await initPortabl(MOCK_USER_ID);
+});
