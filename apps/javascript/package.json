@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "generate:env": "rm -rf dist && mkdir dist && env-cmd -f ./.env node ./scripts/env.js",
-    "build": "rm -rf dist && mkdir dist && node ./scripts/env.js && cp -r node_modules/@portabl/js-sync-with-portabl/dist/index.umd.js ./dist/index.umd.js",
-    "dev": "yarn generate:env && http-server -p 3002",
+    "build": "rm -rf dist && mkdir dist && yarn generate:env && cp -r ./node_modules/@portabl/js-sync-with-portabl/dist/index.umd.js ./dist/index.umd.js",
+    "dev": "yarn build && http-server -p 3002",
     "lint": "eslint ."
   },
   "dependencies": {
