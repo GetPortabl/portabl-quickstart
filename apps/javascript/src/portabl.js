@@ -18,14 +18,7 @@ async function initPortabl(mockUserId) {
   let MOCK_HEADERS_WITH_AUTH = { Authorization: `Basic ${window.btoa(mockUserId)}` };
 
   await Portabl.createSyncWithPortabl({
-    envOverride: {
-      domain: DOMAIN,
-      audience: AUDIENCE,
-      passportUrl: PASSPORT_URL,
-      syncAcceptUrl: SYNC_ACCEPT_URL,
-    },
     rootSelector: '#portabl-sync-root',
-    clientId: CLIENT_ID,
     getPrereqs: async () => {
       const { data } = await axios.get(`${API_BASE_URL}${SYNC_PREREQS}`, {
         headers: MOCK_HEADERS_WITH_AUTH,
@@ -41,7 +34,10 @@ async function initPortabl(mockUserId) {
         },
       );
 
-      return data.invitationUrl;
+      return {
+        invitationUrl: data.invitationUrl,
+        isConnected: data.isConnected,
+      };
     },
   });
 }
