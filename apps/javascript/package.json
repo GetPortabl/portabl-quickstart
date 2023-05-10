@@ -9,7 +9,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@portabl/js-sync-with-portabl": "^0.0.4"
+    "@portabl/js-sync-with-portabl": "^0.0.5"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
