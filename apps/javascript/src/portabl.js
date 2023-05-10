@@ -1,9 +1,5 @@
 const API_BASE_URL = window._env_.JS_APP_PUBLIC_API_HOST;
-const CLIENT_ID = window._env_.JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID;
-const DOMAIN = window._env_.JS_APP_AUTH0_DOMAIN;
-const AUDIENCE = window._env_.JS_APP_AUTH0_API_AUDIENCE;
-const PASSPORT_URL = window._env_.JS_APP_PUBLIC_PASSPORT_URL;
-const SYNC_ACCEPT_URL = window._env_.JS_APP_PUBLIC_SYNC_ACCEPT_URL;
+const WIDGET_BASE_URL = window._env_.JS_APP_WIDGET_BASE_URL;
 const USER_CONSENT = '/user-consent';
 const SYNC_PREREQS = '/sync-prereqs';
 
@@ -19,6 +15,7 @@ async function initPortabl(mockUserId) {
 
   await Portabl.createSyncWithPortabl({
     rootSelector: '#portabl-sync-root',
+    widgetBaseUrl: WIDGET_BASE_URL,
     getPrereqs: async () => {
       const { data } = await axios.get(`${API_BASE_URL}${SYNC_PREREQS}`, {
         headers: MOCK_HEADERS_WITH_AUTH,
