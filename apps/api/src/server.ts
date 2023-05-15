@@ -119,7 +119,12 @@ export const createServer = () => {
             { claims },
             { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
           )
-          .then((result) => console.log('Patch User Claims result', result))
+          .then((result) =>
+            console.log('Patch User Claims result', {
+              status: result?.status,
+              data: result?.data,
+            }),
+          )
           .catch((error) => console.error('Patch User Claims error', error));
 
         // Integrate [Start User Data Sync (Manual Trigger)](https://docs.getportabl.com/api-ref#patch-user-claims) endpoint
