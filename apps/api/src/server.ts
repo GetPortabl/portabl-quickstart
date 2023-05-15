@@ -94,11 +94,11 @@ export const createServer = () => {
         );
 
         // Integrate [Create User Invitation](https://docs.getportabl.com/api-ref#create-user-invitation) endpoint
-        //  - Creates a user invitation url in case a secure connection with a given user has not yet been established;
+        //  - Creates a user invitation url in case a secure session with a given user has not yet been established;
         //    - e.g. `{ isAlreadyConnected: false, invitationUrl: 'https://api.getportabl.com/connect?_oob=eyJ...xfQ' }`
-        //  - This invitation shall be accepted by a given user to establish a secure connection;
-        //  - Once established, this connection can be used to securely deliver messages between SSI agents for data synchronization;
-        //  - If a secure connection with a given user is already establish then "isAlreadyConnected" in the response body will be set to true, and no invitation url will be returned
+        //  - This invitation shall be accepted by a given user to establish a secure session;
+        //  - Once established, this session can be used to securely deliver messages between SSI agents for data synchronization;
+        //  - If a secure session with a given user is already establish then "isAlreadyConnected" in the response body will be set to true, and no invitation url will be returned
         //    - e.g. `{ isAlreadyConnected: true }`
         const { data: providerCreateSyncInviteResponse } = await axios.post(
           `${baseUrl}/provider/users/${userId}/invite`,
@@ -113,28 +113,27 @@ export const createServer = () => {
         // - Patches claims of a user;
         // - By default, patching user claims will start the data synchronization process;
         // - To disable this behaviour and control when data synchronization should start you can provide "noAutoSync=false" in your query params;
-        await axios.patch(
-          `${baseUrl}/provider/users/${userId}/claims`,
-          { claims },
-          { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
-        );
+        axios
+          .patch(
+            `${baseUrl}/provider/users/${userId}/claims`,
+            { claims },
+            { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
+          )
+          .then((result) => console.log('Patch User Claims result', result))
+          .catch((error) => console.error('Patch User Claims error', error));
 
         // Integrate [Start User Data Sync (Manual Trigger)](https://docs.getportabl.com/api-ref#patch-user-claims) endpoint
-        //  - It manually kicks-off data synchronization process over a previously established secure connection;
+        //  - It manually kicks-off data synchronization process over a previously established secure session;
         //  - It can be useful for providers with distributed systems that do not want to rely on automatic data synchronization and have greater control;
-        //  - It allows to batch claim patches together and manually trigger data synchronization by request;
+        //  - It allows to stage claim patches together and manually trigger data synchronization by request;
+
         // await axios.post(
         //   `${baseUrl}/provider/users/${userId}/sync`,
         //   {},
         //   { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
         // );
 
-        const { isLinked, invitationUrl } = providerCreateSyncInviteResponse;
-
-        return res.json({
-          isLinked,
-          invitationUrl,
-        });
+        return res.json(providerCreateSyncInviteResponse);
       } catch (error) {
         console.error('error', error);
         next(error);
