@@ -83,10 +83,9 @@ export const createServer = () => {
         const userId = getUserIdFromRequest(req);
 
         // Integrate [Update or Create a User](https://docs.getportabl.com/api-ref#update-or-create-a-user) endpoint
-        //  - You shall enable data syncronization for a user by passing the following request body:
+        //  - You shall enable data synchronization for a user by passing the following request body:
         //    - `{ settings: { isSyncOn: true } }`
-        //  - If user is not found by (linked to) your Portabl account yet, it will create user in (link to) your Portabl account;
-        //  - Otherwise, if user is found, it will update user settings and set data syncronization flag to true;
+        //  - If the user does not exist in your Portabl account, it will create a new one.
         await axios.put(
           `${baseUrl}/provider/users/${userId}`,
           { settings: { isSyncOn: true } },
@@ -113,19 +112,16 @@ export const createServer = () => {
         // - Patches claims of a user;
         // - By default, patching user claims will start the data synchronization process;
         // - To disable this behaviour and control when data synchronization should start you can provide "noAutoSync=false" in your query params;
-        axios
-          .patch(
-            `${baseUrl}/provider/users/${userId}/claims`,
-            { claims },
-            { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
-          )
-          .then((result) =>
-            console.log('Patch User Claims result', {
-              status: result?.status,
-              data: result?.data,
-            }),
-          )
-          .catch((error) => console.error('Patch User Claims error', error));
+        const patchedClaimsResult = await axios.patch(
+          `${baseUrl}/provider/users/${userId}/claims`,
+          { claims },
+          { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
+        );
+
+        console.log('Patch User Claims result', {
+          status: patchedClaimsResult?.status,
+          data: patchedClaimsResult?.data,
+        });
 
         // Integrate [Start User Data Sync (Manual Trigger)](https://docs.getportabl.com/api-ref#patch-user-claims) endpoint
         //  - It manually kicks-off data synchronization process over a previously established secure session;
