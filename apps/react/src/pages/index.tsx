@@ -7,8 +7,8 @@ import userConsent from '../lib/requests/userConsent.request';
 
 export default function Web() {
   return (
-    <div className={styles['backup-wrapper']}>
-      <h4>Portabl Backup - React</h4>
+    <div className={styles['sync-wrapper']}>
+      <h4>Portabl Sync - React</h4>
       {/* <SyncWithPortabl
         getPrereqs={getPrereqs}
         onUserConsent={userConsent}

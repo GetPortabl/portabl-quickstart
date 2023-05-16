@@ -37,4 +37,4 @@ export const clientSecretAtom = atomWithLocalStorage(LocalStorageKeyEnum.ClientS
 export const redirectUrlAtom = atomWithLocalStorage(LocalStorageKeyEnum.RedirectUrl, '');
 export const onboardingAppDomainUrlAtom = atomWithLocalStorage(LocalStorageKeyEnum.OnboardingAppDomainUrl, '');
 
-export const isBackupButtonConfiguredAtom = atom(false);
+export const isSyncButtonConfiguredAtom = atom(false);

@@ -811,10 +811,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@portabl/js-sync-with-portabl@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.5.tgz#4e625ce8bc8710d45fff7c22838216d8b75b2931"
-  integrity sha512-miBIwKppE4oHGg4Iap4nxfwavvc9ofpVXAZDfgfz3APE/MwRnbCJKYKvnv6vNlLShoeUH6C+swtesBqIpppwew==
+"@portabl/js-sync-with-portabl@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.6.tgz#d35f70938e76ec0be166bd6a7129d7bb31fb04c0"
+  integrity sha512-pPaGGz4eZ/fxLewmCInc1khkYztvU3D3jzc//YnuZhDp0w/+zrSuKCKSi0+Az0VRRblvoFhzURvGcUfPLxP9gQ==
   dependencies:
     jwt-decode "^3.1.2"
 

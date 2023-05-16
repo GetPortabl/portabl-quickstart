@@ -7,7 +7,6 @@ import cors from 'cors';
 import axios from 'axios';
 
 import MOCKED_CLAIMS from './mocks/claims';
-import { randomUUID } from 'crypto';
 
 const PORTABL_API_DOMAIN = process.env.PORTABL_API_DOMAIN;
 const PORTABL_CLIENT_ID = process.env.PORTABL_CLIENT_ID;
@@ -61,104 +60,84 @@ export const createServer = () => {
         next();
       }
     })
-    .get('/sync-prereqs', async (req, res, next) => {
+    .get('/sync-context', async (req, res, next) => {
       try {
         const userId = getUserIdFromRequest(req);
-        let isSyncOn = false;
 
-        try {
-          const { data: settings } = await axios.get(`${baseUrl}/provider/users/${userId}/settings`, {
-            headers: {
-              authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          });
-
-          isSyncOn = settings?.isSyncOn;
-        } catch (err) {
-          // do nothing
-        }
-
-        const { data } = await axios.get(`${baseUrl}/provider/data-profiles/latest/datapoints`, {
+        const { data: context } = await axios.get(`${baseUrl}/provider/users/${userId}/sync-context`, {
           headers: {
             authorization: `Bearer ${ACCESS_TOKEN}`,
           },
         });
 
-        const { datapoints } = data;
-
-        if (!datapoints) {
-          throw new Error('dataProfile must be configured');
-        }
-
-        return res.json({
-          isSyncOn,
-          datapoints,
-        });
+        return res.json(context);
       } catch (e) {
         next(e);
       }
     })
-    .post('/user-consent', async (req, res, next) => {
+    .post('/prepare-sync', async (req, res, next) => {
       try {
+        // Pick User ID
+        //  - Pick an identifier that will serve as a unique external user id within Portabl Core™ API;
+        //  - Subject to implementation of your auth server, you might consider passing and validating you native auth params, and derive a user id from them;
         const userId = getUserIdFromRequest(req);
+
+        // Integrate [Update or Create a User](https://docs.getportabl.com/api-ref#update-or-create-a-user) endpoint
+        //  - You shall enable data synchronization for a user by passing the following request body:
+        //    - `{ settings: { isSyncOn: true } }`
+        //  - If the user does not exist in your Portabl account, it will create a new one.
         await axios.put(
           `${baseUrl}/provider/users/${userId}`,
-          {
-            settings: {
-              isSyncOn: true,
-            },
-          },
-          {
-            headers: {
-              authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          },
+          { settings: { isSyncOn: true } },
+          { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
         );
 
-        // Make a request to get claims from internal APIs
+        // Integrate [Create User Invitation](https://docs.getportabl.com/api-ref#create-user-invitation) endpoint
+        //  - Creates a user invitation url in case a secure session with a given user has not yet been established;
+        //    - e.g. `{ isAlreadyConnected: false, invitationUrl: 'https://api.getportabl.com/connect?_oob=eyJ...xfQ' }`
+        //  - This invitation shall be accepted by a given user to establish a secure session;
+        //  - Once established, this session can be used to securely deliver messages between SSI agents for data synchronization;
+        //  - If a secure session with a given user is already establish then "isAlreadyConnected" in the response body will be set to true, and no invitation url will be returned
+        //    - e.g. `{ isAlreadyConnected: true }`
+        const { data: providerCreateSyncInviteResponse } = await axios.post(
+          `${baseUrl}/provider/users/${userId}/invite`,
+          {},
+          { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
+        );
+
+        // Fetch user's identity claims from internal API(s)
         const claims = MOCKED_CLAIMS;
 
-        // Make a request to get the native user id from internal APIs
-        await axios.put(
+        // Integrate [Patch User Claims](https://docs.getportabl.com/api-ref#patch-user-claims) endpoint
+        // - Patches claims of a user;
+        // - By default, patching user claims will start the data synchronization process;
+        // - To disable this behaviour and control when data synchronization should start you can provide "noAutoSync=false" in your query params;
+        const patchedClaimsResult = await axios.patch(
           `${baseUrl}/provider/users/${userId}/claims`,
-          {
-            claims,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          },
+          { claims },
+          { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
         );
 
-        const { data } = await axios.post(
-          `${baseUrl}/provider/users/${userId}/sync-sessions`,
-          {
-            syncSessionId: randomUUID(),
-          },
-          {
-            headers: {
-              authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          },
-        );
+        console.log('Patch User Claims result', {
+          status: patchedClaimsResult?.status,
+          data: patchedClaimsResult?.data,
+        });
 
-        const syncSessionId = data.syncSession.id;
+        // Integrate [Start User Data Sync (Manual Trigger)](https://docs.getportabl.com/api-ref#patch-user-claims) endpoint
+        //  - It manually kicks-off data synchronization process over a previously established secure session;
+        //  - It can be useful for providers with distributed systems that do not want to rely on automatic data synchronization and have greater control;
+        //  - It allows to stage claim patches together and manually trigger data synchronization by request;
 
-        axios.post(
-          `${baseUrl}/provider/sync-sessions/${syncSessionId}/start`,
-          {},
-          {
-            headers: {
-              authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-          },
-        );
+        // await axios.post(
+        //   `${baseUrl}/provider/users/${userId}/sync`,
+        //   {},
+        //   { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
+        // );
 
-        const { invitationUrl } = data;
-        return res.json({ invitationUrl });
-      } catch (e) {
-        next(e);
+        return res.json(providerCreateSyncInviteResponse);
+      } catch (error) {
+        console.error('error', error);
+        next(error);
       }
     })
     .get('/healthz', (_, res) => {

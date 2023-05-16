@@ -1,7 +1,7 @@
 const API_BASE_URL = window._env_.JS_APP_PUBLIC_API_HOST;
 const WIDGET_BASE_URL = window._env_.JS_APP_WIDGET_BASE_URL;
-const USER_CONSENT = '/user-consent';
-const SYNC_PREREQS = '/sync-prereqs';
+const PREPARE_SYNC = '/prepare-sync';
+const SYNC_CONTEXT = '/sync-context';
 
 // MOCK_USER_ID should be a unique user id to identify users within the Portabl system
 let MOCK_USER_ID = localStorage.getItem('MOCK_USER_ID');
@@ -16,15 +16,16 @@ async function initPortabl(mockUserId) {
   await Portabl.createSyncWithPortabl({
     rootSelector: '#portabl-sync-root',
     widgetBaseUrl: WIDGET_BASE_URL,
-    getPrereqs: async () => {
-      const { data } = await axios.get(`${API_BASE_URL}${SYNC_PREREQS}`, {
+    getSyncContext: async () => {
+      const { data } = await axios.get(`${API_BASE_URL}${SYNC_CONTEXT}`, {
         headers: MOCK_HEADERS_WITH_AUTH,
       });
+
       return data;
     },
-    onUserConsent: async () => {
+    prepareSync: async () => {
       const { data } = await axios.post(
-        `${API_BASE_URL}${USER_CONSENT}`,
+        `${API_BASE_URL}${PREPARE_SYNC}`,
         {},
         {
           headers: MOCK_HEADERS_WITH_AUTH,
@@ -33,7 +34,7 @@ async function initPortabl(mockUserId) {
 
       return {
         invitationUrl: data.invitationUrl,
-        isConnected: data.isConnected,
+        isLinked: data.isLinked,
       };
     },
   });
