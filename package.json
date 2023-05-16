@@ -1,6 +1,6 @@
 {
-  "name": "backup-with-portabl-quickstart",
-  "description": "Get Backup with Portabl up and running.",
+  "name": "sync-with-portabl-quickstart",
+  "description": "Get Sync with Portabl up and running.",
   "author": "dev@getportabl.com",
   "license": "MIT",
   "version": "0.0.0",

@@ -1,8 +1,8 @@
-# Backup with Portabl Quickstart
+# Sync with Portabl Quickstart
 
-This repository accompanies [Portabl's quickstart guide for Backup with Portabl](https://portabl.redoc.ly/docs/quickstart/backup) and shows an example of integrating the SDKs required for issuing credentials for your users.
+This repository accompanies [Portabl's quickstart guide for Sync with Portabl](https://docs.getportabl.com/quickstart) and shows an example of integrating the SDKs required for issuing credentials for your users.
 
-Here you will find necessary steps and samples to get the app running on your machine utilizing our [Server Side Node SDK](https://docs.getportabl.com/docs/sdk/server-side-sdks/node/) and our [Client Side React SDK](https://docs.getportabl.com/docs/sdk/client-side-sdks/backup/react/).
+Here you will find necessary steps and samples to get the app running on your machine utilizing our [APIs](https://docs.getportabl.com/api-ref) and our [Client Side SDKs](https://docs.getportabl.com/tutorials/data-sync#4-data-sync-widget-integration-steps).
 
 ---
 
@@ -38,8 +38,7 @@ Each of these commands can specify a lib argument which can be one of the availa
 #### To start the container:
 
 ```
-make up lib=node
-
+make up lib=javascript
 ```
 
 Open http://localhost:3000.
@@ -72,26 +71,10 @@ yarn dev:react
 
 ## What's inside?
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package manager. It includes the following packages/apps:
+This project is built with turborepo and [Yarn](https://classic.yarnpkg.com/lang/en/) as a package manager. It includes the following apps:
 
-### Apps and Packages
+### Apps
 
 - `javascript`: a vanilla js web app
 - `react`: a [Next.js](https://nextjs.org) app
 - `api`: an [Express](https://expressjs.com/) server
-- `eslint-config-custom`: `eslint` configurations for client side applications (includes `eslint-config-next` and `eslint-config-prettier`)
-- `eslint-config-custom-server`: `eslint` configurations for server side applications (includes `eslint-config-next` and `eslint-config-prettier`)
-- `scripts`: Jest configurations
-- `logger`: Isomorphic logger (a small wrapper around console.log)
-- `tsconfig`: tsconfig.json;s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
