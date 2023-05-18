@@ -12,8 +12,8 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev:react": "turbo run dev --parallel --scope=api --scope=react",
-    "dev:javascript": "turbo run dev --parallel --scope=api --scope=javascript",
+    "dev:react": "turbo run dev --parallel --scope=api --scope=react-quickstart",
+    "dev:javascript": "turbo run dev --parallel --scope=api --scope=javascript-quickstart",
     "format": "prettier --write .",
     "lint": "turbo run lint",
     "test": "turbo run test",

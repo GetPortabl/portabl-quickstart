@@ -1,34 +1,23 @@
 {
-  "name": "react",
+  "name": "react-quickstart",
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "next dev -p 3000",
     "build": "next build",
-    "dev": "local-ssl-proxy --source 3000 --target 9000 | next dev -p 9000",
-    "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.0",
-    "@mantine/core": "^5.2.3",
-    "@mantine/form": "^5.2.3",
-    "@mantine/hooks": "^5.2.3",
-    "@tanstack/react-query": "latest",
+    "@types/node": "20.1.7",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "@portabl/js-sync-with-portabl": "^0.0.6",
     "axios": "^0.27.2",
-    "jotai": "^1.8.0",
-    "local-ssl-proxy": "^2.0.5",
-    "next": "^13.2.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "^17.0.12",
-    "@types/react": "17.0.37",
-    "env-cmd": "^10.1.0",
-    "eslint": "^8.23.1 ",
     "eslint-config-custom": "*",
-    "next-transpile-modules": "9.0.0",
-    "tsconfig": "*",
-    "typescript": "^4.9.5"
+    "next": "13.4.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.0.4"
   }
 }

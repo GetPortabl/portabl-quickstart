@@ -14,7 +14,7 @@ async function initPortabl(mockUserId) {
   let MOCK_HEADERS_WITH_AUTH = { Authorization: `Basic ${window.btoa(mockUserId)}` };
 
   await Portabl.createSyncWithPortabl({
-    rootSelector: '#portabl-sync-root',
+    root: '#portabl-sync-root',
     widgetBaseUrl: WIDGET_BASE_URL,
     getSyncContext: async () => {
       const { data } = await axios.get(`${API_BASE_URL}${SYNC_CONTEXT}`, {
