@@ -3,14 +3,7 @@
     "build": {
       "outputs": ["dist/**", ".next/**", "public/dist/**"],
       "dependsOn": ["^build"],
-      "env": [
-        "JS_APP_PUBLIC_API_HOST",
-        "JS_APP_PUBLIC_PORTABL_PUBLIC_CLIENT_ID",
-        "JS_APP_PUBLIC_SYNC_ACCEPT_URL",
-        "JS_APP_PUBLIC_PASSPORT_URL",
-        "JS_APP_AUTH0_API_AUDIENCE",
-        "JS_APP_AUTH0_DOMAIN"
-      ]
+      "env": ["JS_APP_PUBLIC_API_HOST", "JS_APP_WIDGET_BASE_URL"]
     },
     "test": {
       "outputs": ["coverage/**"],
