@@ -111,9 +111,9 @@ export const createServer = () => {
         // Integrate [Patch User Claims](https://docs.getportabl.com/api-ref#patch-user-claims) endpoint
         // - Patches claims of a user;
         // - By default, patching user claims will start the data synchronization process;
-        // - To disable this behaviour and control when data synchronization should start you can provide "noAutoSync=false" in your query params;
+        // - To disable this behaviour and control when data synchronization should start you can provide "autoSync=false" in your query params;
         const patchedClaimsResult = await axios.patch(
-          `${baseUrl}/provider/users/${userId}/claims`,
+          `${baseUrl}/provider/users/${userId}/claims?autoSync=false`,
           { claims },
           { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
         );
