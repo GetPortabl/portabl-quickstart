@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 
 export default function useMockAuthHeaders() {
@@ -22,9 +22,14 @@ export default function useMockAuthHeaders() {
     setMockUserId(mockUserIdFromStorage);
   }, []);
 
+  const headers = useMemo(
+    () =>
+      typeof window !== 'undefined' && mockUserId ? { Authorization: `Basic ${window.btoa(mockUserId)}` } : undefined,
+    [mockUserId],
+  );
+
   return {
     generateNewHeaders: handleGenerateMockUserId,
-    headers:
-      typeof window !== 'undefined' && mockUserId ? { Authorization: `Basic ${window.btoa(mockUserId)}` } : undefined,
+    headers,
   };
 }
