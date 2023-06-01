@@ -10,40 +10,29 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <style>
-      body {
-        margin: 0;
-      }
-
-      .sync-wrapper {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0 auto;
-        font-family: system-ui, sans-serif;
-        text-align: left;
-      }
-
-      .user-id-wrapper {
-        display: flex;
-        flex-direction: column;
-        row-gap: 10px;
-        margin-bottom: 40px;
-      }
-    </style>
+    <link href="styles.css" rel="stylesheet" />
   </head>
   <body>
+    <img class="bt-logo" src="assets/BT-Logo.svg" />
+    <div class="user-id-wrapper">
+      <button id="generate-new-user">Generate New User</button>
+    </div>
     <div class="sync-wrapper">
-      <div class="user-id-wrapper">
-        <div>Generate new user for testing demonstration</div>
-        <button id="generate-new-user">Generate</button>
+      <div class="profile-wrapper">
+        <h2>Profile Settings</h2>
+        <form class="claim-form">
+          <div>
+            <label>Last Name</label>
+            <input data-claim-key="lastName" placeholder="Last Name" type="text"></input>
+          </div>
+          <div>
+            <label>Email</label>
+            <input data-claim-key="email" placeholder="Email" type="email"></input>
+          </div>
+          <button type="submit">Update Profile</button>
+        </form>
+        <div id="portabl-sync-root"></div>
       </div>
-
-      <h4>Portabl Sync - Vanilla JS</h4>
-      <div id="portabl-sync-root"></div>
     </div>
     <script type="module" src="./src/portabl.js"></script>
   </body>
