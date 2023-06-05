@@ -53,11 +53,49 @@ export const createServer = () => {
           ACCESS_TOKEN = response.data.accessToken;
           next();
         } catch (e) {
-          console.log('ERROR', e);
+          console.error('AUTH ERROR', e);
           next(e);
         }
       } else {
         next();
+      }
+    })
+    .get('/claims', async (req, res, next) => {
+      let claims;
+      try {
+        const userId = getUserIdFromRequest(req);
+        const { data } = await axios.get(`${baseUrl}/provider/users/${userId}/claims`, {
+          headers: {
+            authorization: `Bearer ${ACCESS_TOKEN}`,
+          },
+        });
+        claims = data;
+      } catch (e) {
+        console.error(e, ACCESS_TOKEN);
+        claims = MOCKED_CLAIMS;
+      }
+
+      return res.json(claims);
+    })
+    .post('/update-claims', async (req, res, next) => {
+      const userId = getUserIdFromRequest(req);
+
+      try {
+        const patchedClaimsResult = await axios.patch(
+          `${baseUrl}/provider/users/${userId}/claims`,
+          { claims: req.body },
+          { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
+        );
+
+        console.log('Patch User Claims result', {
+          status: patchedClaimsResult?.status,
+          data: patchedClaimsResult?.data,
+        });
+
+        return res.json({ ok: true });
+      } catch (e) {
+        console.error('Patch User Claims error', e);
+        next(e);
       }
     })
     .get('/sync-context', async (req, res, next) => {
