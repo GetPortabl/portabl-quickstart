@@ -670,6 +670,18 @@
     picocolors "^1.0.0"
     tslib "^2.5.0"
 
+"@portabl/connect-common@*":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@portabl/connect-common/-/connect-common-0.0.5.tgz#321a20522d1dda91647b4fd3d132544e4b7e5353"
+  integrity sha512-sO2H/vRAmrzyq3bchiuwndBZLowkNRZSssjxzTipCpUxJU3x60HphRoDSOVHEUPcvwe2b/0VvScSi4HIsKCaPQ==
+
+"@portabl/js-connect-with-portabl@^0.0.1":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@portabl/js-connect-with-portabl/-/js-connect-with-portabl-0.0.5.tgz#ff55bd26e8dc51a4417c2d2c34c1f525ca77f576"
+  integrity sha512-CqucfKFRQ4BeWSCDSgXEv2ivhDjZDryVGfOIoq0OLSvdmZz9NCancTKhuC6TBpV4/+aaiEssBbjbZ1rRXryxMA==
+  dependencies:
+    "@portabl/connect-common" "*"
+
 "@portabl/js-sync-with-portabl@*", "@portabl/js-sync-with-portabl@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.7.tgz#e2305ebb8202b99ec1cadfa3d8a2da02e3e64bbb"
@@ -688,6 +700,13 @@
     jwt-decode "^3.1.2"
     lodash.set "^4.3.2"
     uuid "^8.3.2"
+
+"@portabl/react-connect-with-portabl@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@portabl/react-connect-with-portabl/-/react-connect-with-portabl-0.0.5.tgz#b249953de403f77824da4be8eafdfb493165c4ee"
+  integrity sha512-wTnFrzlQmONSLyPJcB9PEalZlXZ67kDvtdySkvSjalCXZztM0CtKL3uF+YsJWslXDF0XeG/71DI67H6b8Pluaw==
+  dependencies:
+    "@portabl/connect-common" "*"
 
 "@portabl/react-sync-with-portabl@^0.0.4":
   version "0.0.4"
@@ -1006,6 +1025,11 @@
   integrity sha512-X3HPWTwXRerBZS7Mo1k6vMVR1Z6zmJcDVn5O/31whe0tnjE4te6ZJSJGq1RiqHPjzPdMTfjCFogDJmwng9xHaQ==
   dependencies:
     "@types/superagent" "*"
+
+"@types/uuid@^9.0.2":
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.2.tgz#ede1d1b1e451548d44919dc226253e32a6952c4b"
+  integrity sha512-kNnC1GFBLuhImSnV7w4njQkUiJi0ZXUycu1rUaouPqiKlXkh77JKgdRnTAp1x5eBwcIwbtI+3otwzuIDEuDoxQ==
 
 "@types/yargs-parser@*":
   version "21.0.0"
@@ -6593,6 +6617,11 @@ uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 v8-to-istanbul@^7.0.0:
   version "7.1.2"

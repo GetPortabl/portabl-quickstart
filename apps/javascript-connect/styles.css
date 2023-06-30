@@ -1,0 +1,163 @@
+html {
+  background: linear-gradient(249.15deg, #0c7ad0 0%, #10549b 100%), #0c7ad0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-image: url('./assets/BT-Icon-BG.svg');
+  background-repeat: no-repeat;
+  background-position-y: 263px;
+  padding: 0;
+  margin: 0;
+}
+
+.connect-wrapper {
+  border-radius: 2.5em;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-id-wrapper {
+  margin: 40px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.user-id-wrapper button {
+  border-color: black;
+  background: black;
+}
+
+button {
+  cursor: pointer;
+  padding-top: 0;
+  padding-bottom: 0;
+  vertical-align: middle;
+  text-align: center;
+  font-family: Interstate_Bold, sans-serif;
+  font-weight: 700;
+  border-radius: 6px;
+  color: #fff;
+  border-color: #056dae;
+  background: #056dae;
+  border-width: 2px;
+  border-style: solid;
+  position: relative;
+  line-height: 30px;
+  font-size: 0.75rem;
+  min-width: 90px;
+}
+
+.login-wrapper {
+  background-color: white;
+  padding: 25px;
+  min-width: 350px;
+  min-height: 338px;
+  border-radius: 2.5em;
+}
+
+.claim-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.claim-form label {
+  box-sizing: border-box;
+  color: rgb(102, 102, 102);
+  cursor: default;
+  display: inline-block;
+  font-family: Interstate_Light, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  height: 18px;
+  line-height: 18px;
+  margin-bottom: 3px;
+  max-width: 100%;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 0.5px;
+  height: 48px;
+  padding: 10px 20px;
+  border: solid 1px black;
+  box-shadow: none;
+  display: block;
+  border-radius: 8px;
+}
+
+.bt-logo {
+  position: absolute;
+  width: 153.1px;
+  height: 42px;
+  margin: 40px;
+}
+
+.alt-divider {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-transform: uppercase;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 24px 0;
+}
+
+.alt-divider span {
+  text-align: center;
+  flex: 0.15 0 auto;
+}
+
+.alt-divider:after,
+.alt-divider:before {
+  content: '';
+  border-bottom: 1px solid #c2c8d0;
+  border-bottom: 1px solid var(grey);
+  flex: 1 0 auto;
+  height: 0.5em;
+  margin: 0;
+}
+
+.portabl-connect-btn {
+  background: white;
+  border: grey 1px solid;
+  color: black;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+.logged-in-wrapper {
+  background-color: white;
+  padding: 25px;
+  min-width: 350px;
+  min-height: 338px;
+  border-radius: 2.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logout-btn {
+  background: black;
+  border-color: black;
+  width: inherit;
+}
+
+.hidden {
+  display: none;
+}

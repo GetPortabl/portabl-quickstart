@@ -12,8 +12,10 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev:react": "turbo run dev --parallel --scope=api --scope=react-quickstart",
-    "dev:javascript": "turbo run dev --parallel --scope=api --scope=javascript-quickstart",
+    "dev:sync:react": "turbo run dev --parallel --scope=api --scope=react-sync-quickstart",
+    "dev:sync:javascript": "turbo run dev --parallel --scope=api --scope=javascript-sync-quickstart",
+    "dev:connect:react": "turbo run dev --parallel --scope=api --scope=react-connect-quickstart",
+    "dev:connect:javascript": "turbo run dev --parallel --scope=api --scope=javascript-connect-quickstart",
     "format": "prettier --write .",
     "lint": "turbo run lint",
     "test": "turbo run test",
