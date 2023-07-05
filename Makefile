@@ -4,6 +4,7 @@ ifneq ("$(wildcard docker-compose.local.yml)","")
 DOCKER_COMPOSE_YML += --file docker-compose.local.yml
 endif
 
+integration := sync 
 lib := javascript
 SUCCESS_MESSAGE := "✅ $(lib) quickstart is running on http://localhost:3000"
 
@@ -12,18 +13,18 @@ up:
 	$(DOCKER_COMPOSE) \
 		$(DOCKER_COMPOSE_YML) \
 		$@ --build --detach --remove-orphans \
-		$(lib) api
+		$(sdk)-$(lib) $(sdk)-api
 	@echo $(SUCCESS_MESSAGE)
 
 .PHONY: logs
 logs:
 	$(DOCKER_COMPOSE) \
 		$@ --follow \
-		$(lib) api
+		$(sdk)-$(lib) $(sdk)-api
 
 .PHONY: stop build
 stop build:
 	$(DOCKER_COMPOSE) \
 		$(DOCKER_COMPOSE_YML) \
 		$@ \
-		$(lib) api
+		$(sdk)-$(lib) $(sdk)-api
