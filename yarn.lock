@@ -670,22 +670,25 @@
     picocolors "^1.0.0"
     tslib "^2.5.0"
 
-"@portabl/connect-common@*":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@portabl/connect-common/-/connect-common-0.0.5.tgz#321a20522d1dda91647b4fd3d132544e4b7e5353"
-  integrity sha512-sO2H/vRAmrzyq3bchiuwndBZLowkNRZSssjxzTipCpUxJU3x60HphRoDSOVHEUPcvwe2b/0VvScSi4HIsKCaPQ==
-
-"@portabl/js-connect-with-portabl@^0.0.1":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@portabl/js-connect-with-portabl/-/js-connect-with-portabl-0.0.5.tgz#ff55bd26e8dc51a4417c2d2c34c1f525ca77f576"
-  integrity sha512-CqucfKFRQ4BeWSCDSgXEv2ivhDjZDryVGfOIoq0OLSvdmZz9NCancTKhuC6TBpV4/+aaiEssBbjbZ1rRXryxMA==
+"@portabl/js-connect-with-portabl@*", "@portabl/js-connect-with-portabl@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@portabl/js-connect-with-portabl/-/js-connect-with-portabl-0.0.6.tgz#feb77f6ac05cd2f0cce02e3d35cf9845c1894415"
+  integrity sha512-RFyfObIvtL9tHhDN7zGXX5svrKEZdbqwqCwVDLORlMQsyY1hy/q82i2Aoxf1JDI7c5kVb85rzA7kE10vXVKF+A==
   dependencies:
-    "@portabl/connect-common" "*"
+    jwt-decode "^3.1.2"
+    qs "^6.11.2"
 
-"@portabl/js-sync-with-portabl@*", "@portabl/js-sync-with-portabl@^0.0.7":
+"@portabl/js-sync-with-portabl@*":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.7.tgz#e2305ebb8202b99ec1cadfa3d8a2da02e3e64bbb"
   integrity sha512-wNY0BLedxLh2kUf3YkEJhPPr7Le9UHU9hG6Qvks0RhSZhSIObZpHluofTl+peqCMV2nI8d7bjQS86kji37m8mg==
+  dependencies:
+    jwt-decode "^3.1.2"
+
+"@portabl/js-sync-with-portabl@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.8.tgz#c1519d545fcf563e7e0d47f5a6d7700977bd6221"
+  integrity sha512-KEc2kmOOxqWlD4Ns1bh/iMHHLEH1N8Nk017lyzQUWzGSFLkOWU6JZM4skvMrNGbuc8q1+tuWwuHOytFltjQccA==
   dependencies:
     jwt-decode "^3.1.2"
 
@@ -701,12 +704,12 @@
     lodash.set "^4.3.2"
     uuid "^8.3.2"
 
-"@portabl/react-connect-with-portabl@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@portabl/react-connect-with-portabl/-/react-connect-with-portabl-0.0.5.tgz#b249953de403f77824da4be8eafdfb493165c4ee"
-  integrity sha512-wTnFrzlQmONSLyPJcB9PEalZlXZ67kDvtdySkvSjalCXZztM0CtKL3uF+YsJWslXDF0XeG/71DI67H6b8Pluaw==
+"@portabl/react-connect-with-portabl@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@portabl/react-connect-with-portabl/-/react-connect-with-portabl-0.0.6.tgz#5494f829b4c912d4a755c2faf0265b260e1941cc"
+  integrity sha512-PT01KXMkne8NloqfO5Vy4H0uAai1xNAzkDEktewVaA9WX4CcEeCDOgo4vywbKeEtab8fuxtxCylAy/4yT0hUDQ==
   dependencies:
-    "@portabl/connect-common" "*"
+    "@portabl/js-connect-with-portabl" "*"
 
 "@portabl/react-sync-with-portabl@^0.0.4":
   version "0.0.4"
@@ -5432,6 +5435,13 @@ qs@^6.11.0, qs@^6.4.0:
   version "6.11.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.1.tgz#6c29dff97f0c0060765911ba65cbc9764186109f"
   integrity sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==
+  dependencies:
+    side-channel "^1.0.4"
+
+qs@^6.11.2:
+  version "6.11.2"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.2.tgz#64bea51f12c1f5da1bc01496f48ffcff7c69d7d9"
+  integrity sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==
   dependencies:
     side-channel "^1.0.4"
 
