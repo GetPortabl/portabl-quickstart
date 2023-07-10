@@ -37,4 +37,7 @@ RUN apk add --no-cache bash
 RUN addgroup --system --gid 1001 nodejs
 COPY --from=installer /app/node_modules /usr/share/nginx/html/node_modules
 COPY --from=installer /app/apps/sync-javascript/index.html /usr/share/nginx/html
-COPY --from=installer /app/apps/sync-javascript/env-config.js /usr/share/nginx/html
+COPY --from=installer /app/apps/sync-javascript/styles.css /usr/share/nginx/html
+COPY --from=installer /app/apps/sync-javascript/dist /usr/share/nginx/html/dist
+COPY --from=installer /app/apps/sync-javascript/src /usr/share/nginx/html/src
+COPY --from=installer /app/apps/sync-javascript/assets /usr/share/nginx/html/assets

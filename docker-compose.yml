@@ -8,7 +8,7 @@ services:
       dockerfile: ./apps/sync-react/Dockerfile
     restart: always
     ports:
-      - 3002:3002
+      - 3002:3000
     networks:
       - portabl
     volumes:
@@ -22,7 +22,7 @@ services:
     restart: always
     tty: true
     ports:
-      - 3001:3001
+      - 3001:80
     networks:
       - portabl
     volumes:
@@ -48,7 +48,7 @@ services:
       dockerfile: ./apps/connect-react/Dockerfile
     restart: always
     ports:
-      - 4002:4002
+      - 4002:3000
     networks:
       - portabl
     volumes:
@@ -62,7 +62,7 @@ services:
     restart: always
     tty: true
     ports:
-      - 4001:4001
+      - 4001:80
     networks:
       - portabl
     volumes:

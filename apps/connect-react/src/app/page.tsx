@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useConnect } from '@portabl/react-connect-with-portabl';
 import { useEffect, useState } from 'react';
 
+import portablIcon from './portabl-icon.svg';
+
 export default function Web() {
   const { isLoading, isAuthenticated, loginWithRedirect, getAccessTokenSilently, logout } = useConnect();
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -48,7 +50,7 @@ export default function Web() {
           }}
         >
           <button type="submit" className="portabl-connect-btn">
-            <Image width={15} height={19} alt="" src="./assets/portabl-icon.svg" />
+            <Image width={15} height={19} alt="" src={portablIcon} />
             <span>Connect with Portabl</span>
           </button>
         </form>
