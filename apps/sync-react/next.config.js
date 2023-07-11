@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: true,
   env: {
     JS_APP_PUBLIC_API_HOST: process.env.JS_APP_PUBLIC_API_HOST,

@@ -1,6 +1,6 @@
 {
-  "name": "sync-with-portabl-quickstart",
-  "description": "Get Sync with Portabl up and running.",
+  "name": "quickstart",
+  "description": "Portabl Connect and Sync quickstarts.",
   "author": "dev@getportabl.com",
   "license": "MIT",
   "version": "0.0.0",
@@ -12,8 +12,10 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev:react": "turbo run dev --parallel --scope=api --scope=react-quickstart",
-    "dev:javascript": "turbo run dev --parallel --scope=api --scope=javascript-quickstart",
+    "dev:sync:react": "turbo run dev --parallel --scope=sync-api --scope=sync-react",
+    "dev:sync:javascript": "turbo run dev --parallel --scope=sync-api --scope=sync-javascript",
+    "dev:connect:react": "turbo run dev --parallel --scope=connect-react",
+    "dev:connect:javascript": "turbo run dev --parallel --scope=connect-javascript",
     "format": "prettier --write .",
     "lint": "turbo run lint",
     "test": "turbo run test",

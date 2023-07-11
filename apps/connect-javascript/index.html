@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Portabl - Connect Quickstart</title>
+    <script src="./dist/env.js"></script>
+    <script src="./dist/index.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
+      integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <img class="bt-logo" src="assets/BT-Logo.svg" />
+    <div class="connect-wrapper">
+      <div class="login-wrapper hidden">
+        <h2>Login</h2>
+        <form class="claim-form">
+          <div>
+            <label>Username</label>
+            <input type="text" />
+          </div>
+          <div>
+            <label>Password</label>
+            <input type="password" />
+          </div>
+          <button type="submit">Log In</button>
+        </form>
+        <div class="alt-divider">
+          <span>OR</span>
+        </div>
+        <form name="connect" class="connect-login">
+          <button type="submit" class="portabl-connect-btn">
+            <img src="./assets/portabl-icon.svg" />
+            <span>Connect with Portabl</span>
+          </button>
+        </form>
+      </div>
+      <div class="logged-in-wrapper hidden">
+        <h2>Welcome Back</h2>
+        <div>
+          <h5>Access Token</h5>
+          <input id="access-token" />
+        </div>
+        <button class="logout-btn">Log Out</button>
+      </div>
+    </div>
+    <script type="module" src="./src/portabl.js"></script>
+  </body>
+</html>

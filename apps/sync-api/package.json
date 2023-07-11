@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "sync-api",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -14,8 +14,8 @@
     "preset": "jest-presets/jest/node"
   },
   "dependencies": {
-    "@portabl/node": "^2.0.1",
     "@sphereon/pex": "1.1.3",
+    "axios": "^1.4.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",

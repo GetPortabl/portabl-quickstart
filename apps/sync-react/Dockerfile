@@ -6,7 +6,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN yarn global add turbo
 COPY . .
-RUN turbo prune --scope=react --docker
+RUN turbo prune --scope=sync-react --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM node:lts-alpine AS installer
@@ -17,12 +17,12 @@ WORKDIR /app
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
 COPY --from=builder /app/out/full/ .
-COPY --from=builder /app/apps/react/.env .env
+COPY --from=builder /app/apps/sync-react/.env .env
 COPY .gitignore .gitignore
 COPY turbo.json turbo.json
 
 RUN yarn install
-RUN yarn turbo run build --filter=react...
+RUN yarn turbo run build --filter=sync-react...
 
 FROM node:lts-alpine AS runner
 WORKDIR /app
@@ -33,12 +33,12 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-COPY --from=installer /app/apps/react/next.config.js .
-COPY --from=installer /app/apps/react/package.json .
+COPY --from=installer /app/apps/sync-react/next.config.js .
+COPY --from=installer /app/apps/sync-react/package.json .
 
 # Automatically leverage output traces to reduce image size 
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/react/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/react/.next/static ./apps/react/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/sync-react/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/sync-react/.next/static ./apps/sync-react/.next/static
 
-CMD node apps/react/server.js
+CMD node apps/sync-react/server.js

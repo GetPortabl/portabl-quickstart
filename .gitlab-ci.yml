@@ -17,10 +17,10 @@ build:
   services:
     - name: docker:20-dind
       alias: docker
-      command: ["--tls=false"]
+      command: ['--tls=false']
   variables:
     DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: ""
+    DOCKER_TLS_CERTDIR: ''
   script:
     - docker build -f apps/web/Dockerfile --build-arg NPM_TOKEN=${NPM_TOKEN} .
     - docker build -f apps/api/Dockerfile --build-arg NPM_TOKEN=${NPM_TOKEN} .
@@ -36,18 +36,18 @@ release:
   stage: release
   image:
     name: amazon/aws-cli
-    entrypoint: [""]
+    entrypoint: ['']
   services:
     - name: docker:20-dind
       alias: docker
-      command: ["--tls=false"]
+      command: ['--tls=false']
   before_script:
     - amazon-linux-extras install docker >> /dev/null
     - aws --version
     - docker --version
   variables:
     DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: ""
+    DOCKER_TLS_CERTDIR: ''
   script:
     - docker build -t "$DOCKER_REGISTRY/$WEB_ECR_SLUG:$CI_COMMIT_TAG" -f apps/web/Dockerfile --build-arg NPM_TOKEN=${NPM_TOKEN} .
     - docker build -t "$DOCKER_REGISTRY/$API_ECR_SLUG:$CI_COMMIT_TAG" -f apps/api/Dockerfile --build-arg NPM_TOKEN=${NPM_TOKEN} .

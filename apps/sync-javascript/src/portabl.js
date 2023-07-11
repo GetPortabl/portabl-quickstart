@@ -46,7 +46,7 @@ async function createMockProviderInputs(mockUserId) {
 async function initPortabl(mockUserId) {
   let MOCK_HEADERS_WITH_AUTH = { Authorization: `Basic ${window.btoa(mockUserId)}` };
 
-  await Portabl.createSyncWithPortabl({
+  await Portabl.sync.createSyncWithPortabl({
     root: '#portabl-sync-root',
     widgetBaseUrl: WIDGET_BASE_URL,
     getSyncContext: async () => {

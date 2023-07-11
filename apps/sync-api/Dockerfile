@@ -6,7 +6,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN yarn global add turbo
 COPY . .
-RUN turbo prune --scope=api --docker
+RUN turbo prune --scope=sync-api --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM node:lts-alpine AS installer
@@ -18,12 +18,12 @@ WORKDIR /app
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/yarn.lock ./yarn.lock
 COPY --from=builder /app/out/full/ .
-COPY --from=builder /app/apps/api/.env .env
+COPY --from=builder /app/apps/sync-api/.env .env
 COPY .gitignore .gitignore
 COPY turbo.json turbo.json
 
 RUN yarn install
-RUN yarn turbo run build --filter=api...
+RUN yarn turbo run build --filter=sync-api...
 
 FROM node:lts-alpine AS runner
 WORKDIR /app
@@ -34,5 +34,5 @@ RUN adduser --system --uid 1001 expressjs
 USER expressjs
 COPY --from=installer /app .
 
-CMD node apps/api/dist/index.js
+CMD node apps/sync-api/dist/index.js
 

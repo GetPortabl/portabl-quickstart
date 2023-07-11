@@ -1,16 +1,16 @@
 {
-  "name": "javascript-quickstart",
+  "name": "sync-javascript",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "generate:env": "node ./scripts/env.js",
+    "generate:env": "env-cmd -f ./.env node ./scripts/env.js",
     "build": "rm -rf dist && mkdir dist && yarn generate:env && cp -r ./node_modules/@portabl/js-sync-with-portabl/dist/index.umd.js ./dist/index.umd.js",
-    "dev": "env-cmd -f ./.env yarn build && http-server -p 3002",
+    "dev": "yarn build && http-server -p 3001",
     "lint": "eslint ."
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "@portabl/js-sync-with-portabl": "^0.0.7"
+    "@portabl/js-sync-with-portabl": "^0.0.8"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",

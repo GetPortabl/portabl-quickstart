@@ -1,11 +1,38 @@
 version: '3.4'
 
 services:
-  react:
-    container_name: react
+  sync-react:
+    container_name: sync-react
     build:
       context: .
-      dockerfile: ./apps/react/Dockerfile
+      dockerfile: ./apps/sync-react/Dockerfile
+    restart: always
+    ports:
+      - 3002:3000
+    networks:
+      - portabl
+    volumes:
+      - /app/node_modules
+
+  sync-javascript:
+    container_name: sync-javascript
+    build:
+      context: .
+      dockerfile: ./apps/sync-javascript/Dockerfile
+    restart: always
+    tty: true
+    ports:
+      - 3001:80
+    networks:
+      - portabl
+    volumes:
+      - /app/node_modules
+
+  sync-api:
+    container_name: sync-api
+    build:
+      context: .
+      dockerfile: ./apps/sync-api/Dockerfile
     restart: always
     ports:
       - 3000:3000
@@ -14,28 +41,41 @@ services:
     volumes:
       - /app/node_modules
 
-  javascript:
-    container_name: javascript
+  connect-react:
+    container_name: connect-react
     build:
       context: .
-      dockerfile: ./apps/javascript/Dockerfile
+      dockerfile: ./apps/connect-react/Dockerfile
     restart: always
-    tty: true
     ports:
-      - 3000:80
+      - 4002:3000
     networks:
       - portabl
     volumes:
       - /app/node_modules
 
-  api:
-    container_name: api
+  connect-javascript:
+    container_name: connect-javascript
     build:
       context: .
-      dockerfile: ./apps/api/Dockerfile
+      dockerfile: ./apps/connect-javascript/Dockerfile
+    restart: always
+    tty: true
+    ports:
+      - 4001:80
+    networks:
+      - portabl
+    volumes:
+      - /app/node_modules
+
+  connect-api:
+    container_name: connect-api
+    build:
+      context: .
+      dockerfile: ./apps/connect-api/Dockerfile
     restart: always
     ports:
-      - 3001:3001
+      - 4000:4000
     networks:
       - portabl
     volumes:
