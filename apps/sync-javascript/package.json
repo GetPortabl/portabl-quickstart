@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "generate:env": "env-cmd -f ./.env node ./scripts/env.js",
+    "generate:env": "env-cmd --silent -f ./.env node ./scripts/env.js",
     "build": "rm -rf dist && mkdir dist && yarn generate:env && cp -r ./node_modules/@portabl/js-sync-with-portabl/dist/index.umd.js ./dist/index.umd.js",
     "dev": "yarn build && http-server -p 3001",
     "lint": "eslint ."
