@@ -9,8 +9,8 @@ lib := javascript
 SUCCESS_MESSAGE := "✅ $(lib) quickstart is running"
 
 compose_libs := $(integration)-$(lib)
-ifeq ($(integration), "sync")
-	compose_libs=$(compose_libs)$($(integration)-api)
+ifeq ($(integration), sync)
+	compose_libs += $(integration)-api
 endif
 
 .PHONY: up
