@@ -154,6 +154,11 @@ input {
   justify-content: space-between;
 }
 
+.logged-in-loading {
+  flex-direction: row;
+  justify-content: unset;
+}
+
 .logout-btn {
   background: black;
   border-color: black;
@@ -162,4 +167,14 @@ input {
 
 .hidden {
   display: none;
+}
+
+.loading-spinner-wrapper {
+  display: flex;
+  align-self: center;
+}
+
+.loading-spinner-svg {
+  width: 50px;
+  height: 50px;
 }
