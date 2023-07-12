@@ -31,13 +31,29 @@ const updateUI = async () => {
   const loginWrapper = document.querySelector('.login-wrapper');
   const loggedInWrapper = document.querySelector('.logged-in-wrapper');
   const accessTokenInput = document.querySelector('#access-token');
+  const loadingSpinnerWrapper = document.querySelector('.loading-spinner-wrapper');
+  const loadingSpinner = document.querySelector('.loading-spinner-svg');
+  const logoutBtn = document.querySelector('.logout-btn');
+  const accessTokenInputWrapper = document.querySelector('.access-token-input');
 
   const isAuthenticated = await connectClient.getIsAuthenticated();
 
   if (isAuthenticated) {
     loginWrapper.classList.add('hidden');
     loggedInWrapper.classList.remove('hidden');
+    logoutBtn.classList.add('hidden');
+    accessTokenInputWrapper.classList.add('hidden');
+    loggedInWrapper.style.flexDirection = 'row';
+    loggedInWrapper.style.justifyContent = 'unset';
+
     const { access_token } = await connectClient.getAccessToken();
+    loggedInWrapper.style.flexDirection = 'column';
+    loggedInWrapper.style.justifyContent = 'space-between';
+    loadingSpinner.classList.add('hidden');
+    logoutBtn.classList.remove('hidden');
+    loadingSpinnerWrapper.style.display = 'none';
+    accessTokenInputWrapper.classList.remove('hidden');
+
     accessTokenInput.value = access_token;
   } else {
     loginWrapper.classList.remove('hidden');
