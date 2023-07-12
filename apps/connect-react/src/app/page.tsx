@@ -5,10 +5,12 @@ import { useConnect } from '@portabl/react-connect-with-portabl';
 import { useEffect, useState } from 'react';
 
 import portablIcon from './portabl-icon.svg';
+import preloaderIcon from './preloader.svg';
 
 export default function Web() {
   const { isLoading, isAuthenticated, loginWithRedirect, getAccessTokenSilently, logout } = useConnect();
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  console.log('accessToken: ', accessToken);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -55,15 +57,27 @@ export default function Web() {
           </button>
         </form>
       </div>
-      <div className={`logged-in-wrapper ${!isAuthenticated ? 'hidden' : ''}`}>
+      <div
+        className={`${accessToken ? 'logged-in-wrapper' : 'logged-in-wrapper logged-in-loading'} ${
+          !isAuthenticated ? 'hidden' : ''
+        }`}
+      >
         <h2>Welcome Back</h2>
-        <div>
-          <h5>Access Token</h5>
-          <input defaultValue={accessToken || ''} id="access-token" />
-        </div>
-        <button className="logout-btn" onClick={logout}>
-          Log Out
-        </button>
+        {accessToken ? (
+          <>
+            <div>
+              <h5>Access Token</h5>
+              <input defaultValue={accessToken || ''} id="access-token" />
+            </div>
+            <button className="logout-btn" onClick={logout}>
+              Log Out
+            </button>
+          </>
+        ) : (
+          <div className="loading-spinner-wrapper">
+            <Image className="loading-spinner-svg" src={preloaderIcon} alt="preloader" />
+          </div>
+        )}
       </div>
     </div>
   );
