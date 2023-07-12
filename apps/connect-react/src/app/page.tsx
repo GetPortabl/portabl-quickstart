@@ -10,7 +10,6 @@ import preloaderIcon from './preloader.svg';
 export default function Web() {
   const { isLoading, isAuthenticated, loginWithRedirect, getAccessTokenSilently, logout } = useConnect();
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  console.log('accessToken: ', accessToken);
 
   useEffect(() => {
     if (isAuthenticated) {
