@@ -56,28 +56,22 @@ export default function Web() {
           </button>
         </form>
       </div>
-      <div
-        className={`${accessToken ? 'logged-in-wrapper' : 'logged-in-wrapper logged-in-loading'} ${
-          !isAuthenticated ? 'hidden' : ''
-        }`}
-      >
-        <h2>Welcome Back</h2>
-        {accessToken ? (
-          <>
-            <div>
-              <h5>Access Token</h5>
-              <input defaultValue={accessToken || ''} id="access-token" />
-            </div>
-            <button className="logout-btn" onClick={logout}>
-              Log Out
-            </button>
-          </>
-        ) : (
-          <div className="loading-spinner-wrapper">
-            <Image className="loading-spinner-svg" src={preloaderIcon} alt="preloader" />
+      {(!accessToken && isAuthenticated) || isLoading ? (
+        <div>
+          <Image src={preloaderIcon} alt="loading-spinner" />
+        </div>
+      ) : (
+        <div className={`logged-in-wrapper ${!isAuthenticated ? 'hidden' : ''}`}>
+          <h2>Welcome Back</h2>
+          <div>
+            <h5>Access Token</h5>
+            <input defaultValue={accessToken || ''} id="access-token" />
           </div>
-        )}
-      </div>
+          <button className="logout-btn" onClick={logout}>
+            Log Out
+          </button>
+        </div>
+      )}
     </div>
   );
 }
