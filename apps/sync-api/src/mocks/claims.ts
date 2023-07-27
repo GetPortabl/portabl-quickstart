@@ -6,7 +6,7 @@ const MOCKED_CLAIMS = {
   nationality: 'US',
   socialSecurityNumber: '123-45-6789',
   emailAddress: 'liz.lemon@30rock.com',
-  phoneNumber: '+1 212 456 7890',
+  phoneNumber: '+1-212-456-7890',
   residentialAddress: {
     type: 'ResidentialAddress', // its a type of the given node, but not a datapoint itself
     streetAddress: '168 Riverside Drive, APT 2F',
