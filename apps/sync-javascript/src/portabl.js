@@ -12,34 +12,87 @@ if (!MOCK_USER_ID) {
   localStorage.setItem('MOCK_USER_ID', MOCK_USER_ID);
 }
 async function createMockProviderInputs(mockUserId) {
-  let MOCK_HEADERS_WITH_AUTH = { Authorization: `Basic ${window.btoa(mockUserId)}` };
+  const MOCK_HEADERS_WITH_AUTH = { Authorization: `Basic ${window.btoa(mockUserId)}` };
+
   const { data: claims } = await axios.get(`${API_BASE_URL}${CLAIMS}`, {
     headers: MOCK_HEADERS_WITH_AUTH,
   });
+
   const claimForm = document.querySelector('.claim-form');
 
-  const emailInputEl = claimForm.querySelector("input[data-claim-key='email']");
-  emailInputEl.value = claims.emailAddress;
+  const firstNameInputEl = claimForm.querySelector("input[data-claim-key='firstName']");
+  firstNameInputEl.value = claims.firstName;
 
   const lastNameInputEl = claimForm.querySelector("input[data-claim-key='lastName']");
   lastNameInputEl.value = claims.lastName;
 
+  const emailAddressInputEl = claimForm.querySelector("input[data-claim-key='emailAddress']");
+  emailAddressInputEl.value = claims.emailAddress;
+
+  const phoneNumberInputEl = claimForm.querySelector("input[data-claim-key='phoneNumber']");
+  phoneNumberInputEl.value = claims.phoneNumber;
+
+  const residentialAddressStreetAddressInputEl = claimForm.querySelector(
+    "input[data-claim-key='residentialAddressStreetAddress']",
+  );
+  residentialAddressStreetAddressInputEl.value = claims.residentialAddressStreetAddress;
+
+  const residentialAddressLocalityInputEl = claimForm.querySelector(
+    "input[data-claim-key='residentialAddressLocality']",
+  );
+  residentialAddressLocalityInputEl.value = claims.residentialAddressLocality;
+
+  const residentialAddressPostalCodeInputEl = claimForm.querySelector(
+    "input[data-claim-key='residentialAddressPostalCode']",
+  );
+  residentialAddressPostalCodeInputEl.value = claims.residentialAddressPostalCode;
+
+  const residentialAddressRegionInputEl = claimForm.querySelector("input[data-claim-key='residentialAddressRegion']");
+  residentialAddressRegionInputEl.value = claims.residentialAddressRegion;
+
+  const residentialAddressCountryInputEl = claimForm.querySelector("input[data-claim-key='residentialAddressCountry']");
+  residentialAddressCountryInputEl.value = claims.residentialAddressCountry;
+
   claimForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const requestBody = {
+      ...(firstNameInputEl.value ? { firstName: firstNameInputEl.value } : {}),
+      ...(lastNameInputEl.value ? { lastName: lastNameInputEl.value } : {}),
+      ...(emailAddressInputEl.value ? { emailAddress: emailAddressInputEl.value } : {}),
+      ...(phoneNumberInputEl.value ? { phoneNumber: phoneNumberInputEl.value } : {}),
+    };
+
+    if (
+      residentialAddressStreetAddressInputEl.value ||
+      residentialAddressLocalityInputEl.value ||
+      residentialAddressPostalCodeInputEl.value ||
+      residentialAddressRegionInputEl.value ||
+      residentialAddressCountryInputEl.value
+    ) {
+      requestBody.residentialAddress = {};
+
+      if (residentialAddressStreetAddressInputEl.value) {
+        requestBody.residentialAddress.streetAddress = residentialAddressStreetAddressInputEl.value;
+      }
+      if (residentialAddressLocalityInputEl.value) {
+        requestBody.residentialAddress.locality = residentialAddressLocalityInputEl.value;
+      }
+      if (residentialAddressPostalCodeInputEl.value) {
+        requestBody.residentialAddress.postalCode = residentialAddressPostalCodeInputEl.value;
+      }
+      if (residentialAddressRegionInputEl.value) {
+        requestBody.residentialAddress.region = residentialAddressRegionInputEl.value;
+      }
+      if (residentialAddressCountryInputEl.value) {
+        requestBody.residentialAddress.country = residentialAddressCountryInputEl.value;
+      }
+    }
 
     // Updating claims for a user who has turned sync on
     // will initialize data synchronization with the newly
     // updated values
-    await axios.post(
-      `${API_BASE_URL}${UPDATE_CLAIMS}`,
-      {
-        emailAddress: emailInputEl.value,
-        lastName: lastNameInputEl.value,
-      },
-      {
-        headers: MOCK_HEADERS_WITH_AUTH,
-      },
-    );
+    await axios.post(`${API_BASE_URL}${UPDATE_CLAIMS}`, requestBody, { headers: MOCK_HEADERS_WITH_AUTH });
   });
 }
 

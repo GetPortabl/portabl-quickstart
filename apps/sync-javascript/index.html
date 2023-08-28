@@ -22,12 +22,40 @@
         <h2>Profile Settings</h2>
         <form class="claim-form">
           <div>
+            <label>First Name</label>
+            <input data-claim-key="firstName" placeholder="First Name" type="text" />
+          </div>
+          <div>
             <label>Last Name</label>
             <input data-claim-key="lastName" placeholder="Last Name" type="text" />
           </div>
           <div>
-            <label>Email</label>
-            <input data-claim-key="email" placeholder="Email" type="email" />
+            <label>Email Address</label>
+            <input data-claim-key="emailAddress" placeholder="Email Address" type="email" />
+          </div>
+          <div>
+            <label>Phone Number</label>
+            <input data-claim-key="phoneNumber" placeholder="Phone Number" type="text" />
+          </div>
+          <div>
+            <label>Residential Address: Street Address</label>
+            <input data-claim-key="residentialAddressStreetAddress" placeholder="Street Address" type="text" />
+          </div>
+          <div>
+            <label>Residential Address: City (Locality)</label>
+            <input data-claim-key="residentialAddressLocality" placeholder="City" type="text" />
+          </div>
+          <div>
+            <label>Residential Address: ZIP Code (Postal Code)</label>
+            <input data-claim-key="residentialAddressPostalCode" placeholder="ZIP Code" type="text" />
+          </div>
+          <div>
+            <label>Residential Address: State (Region)</label>
+            <input data-claim-key="residentialAddressRegion" placeholder="State" type="text" />
+          </div>
+          <div>
+            <label>Residential Address: Country</label>
+            <input data-claim-key="residentialAddressCountry" placeholder="Country" type="text" />
           </div>
           <button type="submit">Update Profile</button>
         </form>

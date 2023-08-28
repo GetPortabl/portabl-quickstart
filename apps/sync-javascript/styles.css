@@ -76,7 +76,7 @@ button {
   cursor: default;
   display: inline-block;
   font-family: Interstate_Light, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   height: 18px;
   line-height: 18px;
@@ -88,7 +88,7 @@ button {
   width: 100%;
   box-sizing: border-box;
   letter-spacing: 0.5px;
-  height: 48px;
+  height: 22px;
   padding: 10px 20px;
   border: solid 1px black;
   box-shadow: none;
