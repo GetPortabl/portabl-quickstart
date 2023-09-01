@@ -21,37 +21,37 @@ async function createMockProviderInputs(mockUserId) {
   const claimForm = document.querySelector('.claim-form');
 
   const firstNameInputEl = claimForm.querySelector("input[data-claim-key='firstName']");
-  firstNameInputEl.value = claims.firstName;
+  firstNameInputEl.value = claims.firstName || '';
 
   const lastNameInputEl = claimForm.querySelector("input[data-claim-key='lastName']");
-  lastNameInputEl.value = claims.lastName;
+  lastNameInputEl.value = claims.lastName || '';
 
   const emailAddressInputEl = claimForm.querySelector("input[data-claim-key='emailAddress']");
-  emailAddressInputEl.value = claims.emailAddress;
+  emailAddressInputEl.value = claims.emailAddress || '';
 
   const phoneNumberInputEl = claimForm.querySelector("input[data-claim-key='phoneNumber']");
-  phoneNumberInputEl.value = claims.phoneNumber;
+  phoneNumberInputEl.value = claims.phoneNumber || '';
 
   const residentialAddressStreetAddressInputEl = claimForm.querySelector(
     "input[data-claim-key='residentialAddressStreetAddress']",
   );
-  residentialAddressStreetAddressInputEl.value = claims.residentialAddressStreetAddress;
+  residentialAddressStreetAddressInputEl.value = claims.residentialAddressStreetAddress || '';
 
   const residentialAddressLocalityInputEl = claimForm.querySelector(
     "input[data-claim-key='residentialAddressLocality']",
   );
-  residentialAddressLocalityInputEl.value = claims.residentialAddressLocality;
+  residentialAddressLocalityInputEl.value = claims.residentialAddressLocality || '';
 
   const residentialAddressPostalCodeInputEl = claimForm.querySelector(
     "input[data-claim-key='residentialAddressPostalCode']",
   );
-  residentialAddressPostalCodeInputEl.value = claims.residentialAddressPostalCode;
+  residentialAddressPostalCodeInputEl.value = claims.residentialAddressPostalCode || '';
 
   const residentialAddressRegionInputEl = claimForm.querySelector("input[data-claim-key='residentialAddressRegion']");
-  residentialAddressRegionInputEl.value = claims.residentialAddressRegion;
+  residentialAddressRegionInputEl.value = claims.residentialAddressRegion || '';
 
   const residentialAddressCountryInputEl = claimForm.querySelector("input[data-claim-key='residentialAddressCountry']");
-  residentialAddressCountryInputEl.value = claims.residentialAddressCountry;
+  residentialAddressCountryInputEl.value = claims.residentialAddressCountry || '';
 
   claimForm.addEventListener('submit', async (e) => {
     e.preventDefault();

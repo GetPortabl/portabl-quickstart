@@ -43,22 +43,22 @@ export const createServer = () => {
     .use(json())
     .use(cors())
     .use(async (req, res, next) => {
-      if (!ACCESS_TOKEN) {
-        try {
-          const response = await axios.post(`${baseUrl}/provider/token`, {
-            clientId: PORTABL_CLIENT_ID,
-            clientSecret: PORTABL_CLIENT_SECRET,
-          });
+      // if (!ACCESS_TOKEN) {
+      try {
+        const response = await axios.post(`${baseUrl}/provider/token`, {
+          clientId: PORTABL_CLIENT_ID,
+          clientSecret: PORTABL_CLIENT_SECRET,
+        });
 
-          ACCESS_TOKEN = response.data.accessToken;
-          next();
-        } catch (e) {
-          console.error('AUTH ERROR', e);
-          next(e);
-        }
-      } else {
+        ACCESS_TOKEN = response.data.accessToken;
         next();
+      } catch (e) {
+        console.error('AUTH ERROR', e);
+        next(e);
       }
+      // } else {
+      //   next();
+      // }
     })
     .get('/claims', async (req, res, next) => {
       let claims;
