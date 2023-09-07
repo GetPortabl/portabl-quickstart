@@ -64,13 +64,13 @@ button {
   border-radius: 2.5em;
 }
 
-.claim-form {
+.datapoint-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.claim-form label {
+.datapoint-form label {
   box-sizing: border-box;
   color: rgb(102, 102, 102);
   cursor: default;

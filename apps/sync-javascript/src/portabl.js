@@ -1,9 +1,9 @@
 const API_BASE_URL = window._env_.JS_APP_PUBLIC_API_HOST;
 const WIDGET_BASE_URL = window._env_.JS_APP_WIDGET_BASE_URL;
+
 const PREPARE_SYNC = '/prepare-sync';
 const SYNC_CONTEXT = '/sync-context';
-const CLAIMS = '/claims';
-const UPDATE_CLAIMS = '/update-claims';
+const DATAPOINTS_ROUTE = '/datapoints';
 
 // MOCK_USER_ID should be a unique user id to identify users within the Portabl system
 let MOCK_USER_ID = localStorage.getItem('MOCK_USER_ID');
@@ -14,44 +14,45 @@ if (!MOCK_USER_ID) {
 
 async function createMockProviderInputs(mockUserId) {
   let MOCK_HEADERS_WITH_AUTH = { Authorization: `Basic ${window.btoa(mockUserId)}` };
-  const { data: claims } = await axios.get(`${API_BASE_URL}${CLAIMS}`, {
+  const { data: datapoints } = await axios.get(`${API_BASE_URL}${DATAPOINTS_ROUTE}`, {
     headers: MOCK_HEADERS_WITH_AUTH,
   });
 
-  const claimForm = document.querySelector('.claim-form');
+  const datapointForm = document.querySelector('.datapoint-form');
 
-  const inputs = [...claimForm.querySelectorAll('input[data-claim-key]')];
+  const inputs = [...datapointForm.querySelectorAll('input[datapoint-key]')];
 
   inputs.forEach((inputEl) => {
-    const claimKey = inputEl.dataset['claimKey'];
-    console.log(claimKey);
-    inputEl.value = _.get(claims, claimKey) || '';
+    const datapointKey = inputEl.dataset['datapointKey'];
+    console.log(datapointKey);
+    inputEl.value = _.get(datapoints, datapointKey) || '';
   });
 
-  claimForm.addEventListener('submit', async (e) => {
+  datapointForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     console.log(inputs);
 
-    const body = inputs.reduce((agg, inputEl) => {
-      const claimKeys = inputEl.dataset['claimKey'];
+    const datapoints = inputs.reduce((agg, inputEl) => {
+      const datapointKeys = inputEl.dataset['datapointKey'];
 
-      if (!claimKeys) {
+      if (!datapointKeys) {
         return agg;
       }
 
       const mutatedAgg = { ...agg };
 
-      _.set(mutatedAgg, claimKeys, inputEl.value);
+      _.set(mutatedAgg, datapointKeys, inputEl.value);
 
       return mutatedAgg;
     }, {});
 
-    // Updating claims for a user who has turned sync on
-    // will initialize data synchronization with the newly
-    // updated values
-    await axios.post(`${API_BASE_URL}${UPDATE_CLAIMS}`, body, {
-      headers: MOCK_HEADERS_WITH_AUTH,
-    });
+    await axios.patch(
+      `${API_BASE_URL}${DATAPOINTS_ROUTE}`,
+      { datapoints, autoSync: true },
+      {
+        headers: MOCK_HEADERS_WITH_AUTH,
+      },
+    );
   });
 }
 
