@@ -43,25 +43,25 @@ export const createServer = () => {
     .use(json())
     .use(cors())
     .use(async (req, res, next) => {
-      if (!ACCESS_TOKEN) {
-        try {
-          const response = await axios.post(`${baseUrl}/provider/token`, {
-            clientId: PORTABL_CLIENT_ID,
-            clientSecret: PORTABL_CLIENT_SECRET,
-          });
+      // if (!ACCESS_TOKEN) {
+      try {
+        const response = await axios.post(`${baseUrl}/provider/token`, {
+          clientId: PORTABL_CLIENT_ID,
+          clientSecret: PORTABL_CLIENT_SECRET,
+        });
 
-          ACCESS_TOKEN = response.data.accessToken;
-          next();
-        } catch (e) {
-          console.error('AUTH ERROR', e);
-          next(e);
-        }
-      } else {
+        ACCESS_TOKEN = response.data.accessToken;
         next();
+      } catch (e) {
+        console.error('AUTH ERROR', e);
+        next(e);
       }
+      // } else {
+      //   next();
+      // }
     })
     .get('/claims', async (req, res, next) => {
-      let claims;
+      let claimsLatest;
       try {
         const userId = getUserIdFromRequest(req);
         const { data } = await axios.get(`${baseUrl}/provider/users/${userId}/claims`, {
@@ -69,13 +69,13 @@ export const createServer = () => {
             authorization: `Bearer ${ACCESS_TOKEN}`,
           },
         });
-        claims = data;
+        claimsLatest = data?.syncContext?.claimsLatest || MOCKED_CLAIMS;
       } catch (e) {
         console.error(e, ACCESS_TOKEN);
-        claims = MOCKED_CLAIMS;
+        claimsLatest = MOCKED_CLAIMS;
       }
 
-      return res.json(claims);
+      return res.json(claimsLatest);
     })
     .post('/update-claims', async (req, res, next) => {
       const userId = getUserIdFromRequest(req);
