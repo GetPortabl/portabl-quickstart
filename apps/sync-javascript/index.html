@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Portabl - Sync Quickstart</title>
+    <title>Portabl - Sync</title>
     <script src="./dist/env.js"></script>
     <script src="./dist/index.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
@@ -11,16 +11,20 @@
       referrerpolicy="no-referrer"
     ></script>
     <link href="styles.css" rel="stylesheet" />
+    <link rel="icon" href="assets/favicon.ico" />
   </head>
   <body>
-    <img class="bt-logo" src="assets/BT-Logo.svg" />
     <div class="user-id-wrapper">
       <button id="generate-new-user">Generate New User</button>
     </div>
     <div class="sync-wrapper">
       <div class="profile-wrapper">
-        <h2>Profile Settings</h2>
+        <h2>Profile</h2>
         <form class="claim-form">
+          <div>
+            <label>First Name</label>
+            <input data-claim-key="firstName" placeholder="First Name" type="text" />
+          </div>
           <div>
             <label>Last Name</label>
             <input data-claim-key="lastName" placeholder="Last Name" type="text" />

@@ -19,10 +19,13 @@ async function createMockProviderInputs(mockUserId) {
   const claimForm = document.querySelector('.claim-form');
 
   const emailInputEl = claimForm.querySelector("input[data-claim-key='email']");
-  emailInputEl.value = claims.emailAddress;
+  emailInputEl.value = claims.emailAddress || '';
+
+  const firstNameInputEl = claimForm.querySelector("input[data-claim-key='firstName']");
+  firstNameInputEl.value = claims.firstName || '';
 
   const lastNameInputEl = claimForm.querySelector("input[data-claim-key='lastName']");
-  lastNameInputEl.value = claims.lastName;
+  lastNameInputEl.value = claims.lastName || '';
 
   claimForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -34,6 +37,7 @@ async function createMockProviderInputs(mockUserId) {
       `${API_BASE_URL}${UPDATE_CLAIMS}`,
       {
         emailAddress: emailInputEl.value,
+        firstName: firstName.value,
         lastName: lastNameInputEl.value,
       },
       {
