@@ -59,7 +59,7 @@ button {
 .profile-wrapper {
   background-color: white;
   padding: 25px;
-  min-width: 350px;
+  min-width: 400px;
   min-height: 338px;
   border-radius: 2.5em;
 }
@@ -67,10 +67,25 @@ button {
 .claim-form {
   display: flex;
   flex-direction: column;
+  gap: 24px;
+}
+
+.claim-form .stack-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.claim-form .stack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   gap: 10px;
 }
 
-.claim-form label {
+.claim-form label,
+.claim-form legend {
   box-sizing: border-box;
   color: rgb(102, 102, 102);
   cursor: default;
@@ -88,8 +103,7 @@ button {
   width: 100%;
   box-sizing: border-box;
   letter-spacing: 0.5px;
-  height: 48px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border: solid 1px black;
   box-shadow: none;
   display: block;
@@ -101,4 +115,9 @@ button {
   width: 153.1px;
   height: 42px;
   margin: 40px;
+}
+
+#portabl-sync-root {
+  display: flex;
+  justify-content: center;
 }

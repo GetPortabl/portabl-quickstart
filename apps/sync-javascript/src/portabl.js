@@ -11,39 +11,47 @@ if (!MOCK_USER_ID) {
   MOCK_USER_ID = uuid.v4();
   localStorage.setItem('MOCK_USER_ID', MOCK_USER_ID);
 }
+
 async function createMockProviderInputs(mockUserId) {
   let MOCK_HEADERS_WITH_AUTH = { Authorization: `Basic ${window.btoa(mockUserId)}` };
   const { data: claims } = await axios.get(`${API_BASE_URL}${CLAIMS}`, {
     headers: MOCK_HEADERS_WITH_AUTH,
   });
+
   const claimForm = document.querySelector('.claim-form');
 
-  const emailInputEl = claimForm.querySelector("input[data-claim-key='email']");
-  emailInputEl.value = claims.emailAddress || '';
+  const inputs = [...claimForm.querySelectorAll('input[data-claim-key]')];
 
-  const firstNameInputEl = claimForm.querySelector("input[data-claim-key='firstName']");
-  firstNameInputEl.value = claims.firstName || '';
-
-  const lastNameInputEl = claimForm.querySelector("input[data-claim-key='lastName']");
-  lastNameInputEl.value = claims.lastName || '';
+  inputs.forEach((inputEl) => {
+    const claimKey = inputEl.dataset['claimKey'];
+    console.log(claimKey);
+    inputEl.value = _.get(claims, claimKey) || '';
+  });
 
   claimForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    console.log(inputs);
+
+    const body = inputs.reduce((agg, inputEl) => {
+      const claimKeys = inputEl.dataset['claimKey'];
+
+      if (!claimKeys) {
+        return agg;
+      }
+
+      const mutatedAgg = { ...agg };
+
+      _.set(mutatedAgg, claimKeys, inputEl.value);
+
+      return mutatedAgg;
+    }, {});
 
     // Updating claims for a user who has turned sync on
     // will initialize data synchronization with the newly
     // updated values
-    await axios.post(
-      `${API_BASE_URL}${UPDATE_CLAIMS}`,
-      {
-        emailAddress: emailInputEl.value,
-        firstName: firstName.value,
-        lastName: lastNameInputEl.value,
-      },
-      {
-        headers: MOCK_HEADERS_WITH_AUTH,
-      },
-    );
+    await axios.post(`${API_BASE_URL}${UPDATE_CLAIMS}`, body, {
+      headers: MOCK_HEADERS_WITH_AUTH,
+    });
   });
 }
 
