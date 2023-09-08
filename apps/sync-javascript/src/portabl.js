@@ -20,11 +20,11 @@ async function createMockProviderInputs(mockUserId) {
 
   const datapointForm = document.querySelector('.datapoint-form');
 
-  const inputs = [...datapointForm.querySelectorAll('input[datapoint-key]')];
+  const inputs = [...datapointForm.querySelectorAll('input[data-datapoint-key]')];
 
   inputs.forEach((inputEl) => {
     const datapointKey = inputEl.dataset['datapointKey'];
-    console.log(datapointKey);
+    console.log('datapointKey', datapointKey);
     inputEl.value = _.get(datapoints, datapointKey) || '';
   });
 
