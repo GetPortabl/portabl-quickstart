@@ -1,4 +1,4 @@
-const MOCKED_CLAIMS = {
+export const MOCKED_DATAPOINTS = {
   type: 'FinancialCredential', // its a type of the given node, but not a datapoint itself
   firstName: 'Liz',
   lastName: 'Lemon',
@@ -16,5 +16,3 @@ const MOCKED_CLAIMS = {
     country: 'US',
   },
 };
-
-export default MOCKED_CLAIMS;

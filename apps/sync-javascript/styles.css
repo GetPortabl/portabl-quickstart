@@ -64,28 +64,28 @@ button {
   border-radius: 2.5em;
 }
 
-.claim-form {
+.datapoint-form {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.claim-form .stack-group {
+.datapoint-form .stack-group {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 24px;
 }
 
-.claim-form .stack {
+.datapoint-form .stack {
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 10px;
 }
 
-.claim-form label,
-.claim-form legend {
+.datapoint-form label,
+.datapoint-form legend {
   box-sizing: border-box;
   color: rgb(102, 102, 102);
   cursor: default;
@@ -99,7 +99,7 @@ button {
   max-width: 100%;
 }
 
-.claim-form input {
+.datapoint-form input {
   width: 100%;
   box-sizing: border-box;
   letter-spacing: 0.5px;

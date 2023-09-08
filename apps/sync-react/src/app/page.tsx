@@ -7,8 +7,9 @@ import useMockAuthHeaders from '../hooks/useMockAuthHeaders.hook';
 
 const API_BASE_URL = process.env.JS_APP_PUBLIC_API_HOST;
 const WIDGET_BASE_URL = process.env.JS_APP_WIDGET_BASE_URL;
-const PREPARE_SYNC = '/prepare-sync';
-const SYNC_CONTEXT = '/sync-context';
+
+const INIT_DATA_SYNC_ROUTE = '/init-data-sync';
+const SYNC_CONTEXT_ROUTE = '/sync-context';
 
 export default function Web() {
   const { headers, generateNewHeaders } = useMockAuthHeaders();
@@ -28,7 +29,7 @@ export default function Web() {
       <SyncWithPortabl
         widgetBaseUrl={WIDGET_BASE_URL}
         getSyncContext={async () => {
-          const { data } = await axios.get(`${API_BASE_URL}${SYNC_CONTEXT}`, {
+          const { data } = await axios.get(`${API_BASE_URL}${SYNC_CONTEXT_ROUTE}`, {
             headers,
           });
 
@@ -36,7 +37,7 @@ export default function Web() {
         }}
         prepareSync={async () => {
           const { data } = await axios.post(
-            `${API_BASE_URL}${PREPARE_SYNC}`,
+            `${API_BASE_URL}${INIT_DATA_SYNC_ROUTE}`,
             {},
             {
               headers,
