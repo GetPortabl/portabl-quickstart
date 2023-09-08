@@ -41,7 +41,9 @@ async function createMockProviderInputs(mockUserId) {
 
       const mutatedAgg = { ...agg };
 
-      _.set(mutatedAgg, datapointKeys, inputEl.value);
+      if (inputEl.value) {
+        _.set(mutatedAgg, datapointKeys, inputEl.value);
+      }
 
       return mutatedAgg;
     }, {});
