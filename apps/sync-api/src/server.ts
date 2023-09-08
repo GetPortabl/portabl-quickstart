@@ -112,7 +112,7 @@ export const createServer = () => {
             authorization: `Bearer ${ACCESS_TOKEN}`,
           },
         });
-        console.log(`Patch User's Datapoints result`, {
+        console.log(`Fetch User's DataSync Context result`, {
           status: fetchUserDataSyncContextResult?.status,
           data: fetchUserDataSyncContextResult?.data,
         });
@@ -123,7 +123,7 @@ export const createServer = () => {
         next(e);
       }
     })
-    .post('/prepare-data-sync', async (req, res, next) => {
+    .post('/init-data-sync', async (req, res, next) => {
       try {
         const userId = getUserIdFromRequest(req);
 
@@ -146,14 +146,14 @@ export const createServer = () => {
           { datapoints },
           { headers: { authorization: `Bearer ${ACCESS_TOKEN}` } },
         );
-        console.log('Patch User Datapoints result', {
+        console.log(`Patch User's Datapoints result`, {
           status: patchedDatapointsResult?.status,
           data: patchedDatapointsResult?.data,
         });
 
         return res.json(createUserInvitationResult);
       } catch (e) {
-        console.error('Prepare DataSync error', e);
+        console.error('Init DataSync error', e);
         next(e);
       }
     })

@@ -8,7 +8,7 @@ import useMockAuthHeaders from '../hooks/useMockAuthHeaders.hook';
 const API_BASE_URL = process.env.JS_APP_PUBLIC_API_HOST;
 const WIDGET_BASE_URL = process.env.JS_APP_WIDGET_BASE_URL;
 
-const PREPARE_DATA_SYNC_ROUTE = '/prepare-data-sync';
+const INIT_DATA_SYNC_ROUTE = '/init-data-sync';
 const SYNC_CONTEXT_ROUTE = '/sync-context';
 
 export default function Web() {
@@ -37,7 +37,7 @@ export default function Web() {
         }}
         prepareSync={async () => {
           const { data } = await axios.post(
-            `${API_BASE_URL}${PREPARE_DATA_SYNC_ROUTE}`,
+            `${API_BASE_URL}${INIT_DATA_SYNC_ROUTE}`,
             {},
             {
               headers,
