@@ -24,25 +24,23 @@ async function createMockProviderInputs(mockUserId) {
 
   inputs.forEach((inputEl) => {
     const datapointKey = inputEl.dataset['datapointKey'];
-    console.log('datapointKey', datapointKey);
     inputEl.value = _.get(datapoints, datapointKey) || '';
   });
 
   datapointForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log(inputs);
 
     const datapoints = inputs.reduce((agg, inputEl) => {
-      const datapointKeys = inputEl.dataset['datapointKey'];
+      const datapointKey = inputEl.dataset['datapointKey'];
 
-      if (!datapointKeys) {
+      if (!datapointKey) {
         return agg;
       }
 
       const mutatedAgg = { ...agg };
 
       if (inputEl.value) {
-        _.set(mutatedAgg, datapointKeys, inputEl.value);
+        _.set(mutatedAgg, datapointKey, inputEl.value);
       }
 
       return mutatedAgg;
