@@ -1,5 +1,6 @@
 const API_BASE_URL = window._env_.JS_APP_PUBLIC_API_HOST;
 const WIDGET_BASE_URL = window._env_.JS_APP_WIDGET_BASE_URL;
+const PORTABL_ACCOUNT_ID = window._env_.JS_APP_PORTABL_ACCOUNT_ID;
 
 const INIT_DATA_SYNC_ROUTE = '/init-data-sync';
 const SYNC_CONTEXT_ROUTE = '/sync-context';
@@ -62,6 +63,7 @@ async function initPortabl(mockUserId) {
   await Portabl.sync.createSyncWithPortabl({
     root: '#portabl-sync-root',
     widgetBaseUrl: WIDGET_BASE_URL,
+    accountId: PORTABL_ACCOUNT_ID,
     getSyncContext: async () => {
       const { data } = await axios.get(`${API_BASE_URL}${SYNC_CONTEXT_ROUTE}`, {
         headers: MOCK_HEADERS_WITH_AUTH,
