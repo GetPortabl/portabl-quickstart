@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "@portabl/js-sync-with-portabl": "^0.0.8"
+    "@portabl/js-sync-with-portabl": "^0.1.0"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
