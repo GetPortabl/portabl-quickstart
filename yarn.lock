@@ -692,10 +692,10 @@
   dependencies:
     jwt-decode "^3.1.2"
 
-"@portabl/js-sync-with-portabl@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.1.0.tgz#ec2c0fe535378a4dcca816a6e4ff57db8d578a8e"
-  integrity sha512-9+xLQKtErfexlL/aX0fFc/MQmXHxslnLLAFfG/Ia2rVmxB4VnO9nknSFwGvB8DPCrGLRnTpFhAT9xwKjbnaJbg==
+"@portabl/js-sync-with-portabl@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.1.1.tgz#93f769edcd1980cb6d24f5b82f5840a623eb9a63"
+  integrity sha512-oz1SSN7tNBFZLRbnmeAwrRc7rK9Pqx3zeBOySJUX8vvtaIck7CUDBwS9Z57JDZoZHFQTNb+6/2h6lUJ9WzpZKQ==
   dependencies:
     jwt-decode "^3.1.2"
 
@@ -706,10 +706,10 @@
   dependencies:
     "@portabl/js-connect-with-portabl" "*"
 
-"@portabl/react-sync-with-portabl@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@portabl/react-sync-with-portabl/-/react-sync-with-portabl-0.1.0.tgz#61b802752107c297b6c62bbf22dfdbc4a695ec8a"
-  integrity sha512-3UY+fARoXg5X2H/QNOkZCAGOp0NktLgezNVP+G8WKgsM3vmgQv24qlmYECQvF/xCfZM5zgpZNi5KZ1fhRxGiVw==
+"@portabl/react-sync-with-portabl@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@portabl/react-sync-with-portabl/-/react-sync-with-portabl-0.1.1.tgz#93acc6d837b37eaf78fe35e3a59c540a2e04cda4"
+  integrity sha512-5fZOIZIZKpjUEC5Nu438ysAbshs2xbqzsyCFJCUvFmVCZN0OAyqCvHIewOoqxbn/ofXXsFXL8wdDQ8nbzQn57w==
   dependencies:
     "@portabl/js-sync-with-portabl" "*"
 
