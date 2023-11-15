@@ -9,8 +9,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "axios": "^0.27.2",
-    "@portabl/js-sync-with-portabl": "^0.1.1"
+    "@portabl/js-sync-with-portabl": "^0.1.2",
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
