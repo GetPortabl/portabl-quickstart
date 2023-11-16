@@ -9,7 +9,7 @@ export const MOCKED_DATAPOINTS = {
   phoneNumber: '+1-212-456-7890',
   residentialAddress: {
     type: 'ResidentialAddress', // its a type of the given node, but not a datapoint itself
-    streetAddress: '168 Riverside Drive, APT 2F',
+    streetAddress: '160 Riverside Dr #3B',
     locality: 'New York',
     region: 'NY',
     postalCode: '10024',
