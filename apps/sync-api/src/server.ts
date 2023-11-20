@@ -103,15 +103,18 @@ export const createServer = () => {
         next(e);
       }
     })
-    .get('/sync-context', async (req, res, next) => {
+    .get('/data-sync/context', async (req, res, next) => {
       try {
         const userId = getUserIdFromRequest(req);
 
-        const fetchUserDataSyncContextResult = await axios.get(`${baseUrl}/provider/users/${userId}/sync-context`, {
-          headers: {
-            authorization: `Bearer ${ACCESS_TOKEN}`,
+        const fetchUserDataSyncContextResult = await axios.get(
+          `${baseUrl}/provider/users/${userId}/data-sync/context`,
+          {
+            headers: {
+              authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
           },
-        });
+        );
         console.log(`Fetch User's DataSync Context result`, {
           status: fetchUserDataSyncContextResult?.status,
           data: fetchUserDataSyncContextResult?.data,
