@@ -1,6 +1,6 @@
 # Portabl Quickstart
 
-Welcome to the Portabl Quickstart repository! This repository serves as a companion to Portabl's quickstart guides for [Data Sync](https://docs.getportabl.com/quickstart/data-sync) and [Connect](https://docs.getportabl.com/quickstart/connect). Here, you will find practical examples that demonstrate how to integrate the Sync Widget SDKs to issue credentials to your users and the Connect SDKs to facilitate their authentication.
+Welcome to the Portabl Quickstart repository! This repository serves as a companion to Portabl's quickstart guides for verifying, issuing, and authenticating. Here, you will find practical examples that demonstrate how to integrate the Connect SDK to authorize users as well as apis to issue and authenticate them.
 
 ---
 
@@ -57,28 +57,10 @@ If you prefer not to use Docker, follow the steps below:
 
 2. Run both the frontend and "api" sample projects in development mode. Choose one of the preset commands based on the integration and library you want to run:
 
-   #### Sync Javascript
+   #### Verify NextJs
 
    ```bash
-   yarn dev:sync:javascript
-   ```
-
-   #### Sync React
-
-   ```bash
-   yarn dev:sync:react
-   ```
-
-   #### Connect Javascript
-
-   ```bash
-   yarn dev:connect:javascript
-   ```
-
-   #### Connect React
-
-   ```bash
-   yarn dev:connect:react
+   yarn dev:verify:
    ```
 
 ---
@@ -89,14 +71,6 @@ This project utilizes turborepo and [Yarn](https://classic.yarnpkg.com/lang/en/)
 
 ### Apps
 
-**Sync:**
+**Verify:**
 
-- `sync-javascript`: A vanilla JavaScript web app.
-- `sync-react`: A [Next.js](https://nextjs.org) app.
-- `sync-api`: An [Express](https://expressjs.com/) server.
-
-**Connect:**
-
-- `connect-javascript`: A vanilla JavaScript web app.
-- `connect-react`: A [Next.js](https://nextjs.org) app.
-- `connect-api`: An [Express](https://expressjs.com/) server.
+- `verify`: A [Next.js](https://nextjs.org) app.

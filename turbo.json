@@ -8,7 +8,11 @@
         "JS_APP_WIDGET_BASE_URL",
         "JS_APP_PORTABL_ACCOUNT_ID",
         "JS_APP_PORTABL_CONNECT_DOMAIN",
-        "JS_APP_PORTABL_WALLET_DOMAIN"
+        "JS_APP_PORTABL_WALLET_DOMAIN",
+        "JS_APP_PORTABL_PROJECT_ID",
+        "PORTABL_API_DOMAIN",
+        "PORTABL_CLIENT_ID",
+        "PORTABL_CLIENT_SECRET"
       ]
     },
     "test": {

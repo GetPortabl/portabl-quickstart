@@ -2,31 +2,19 @@
 import Image from 'next/image';
 
 import { useConnect } from '@portabl/react-connect-with-portabl';
-import { useEffect, useState } from 'react';
 
 import portablIcon from './portabl-icon.svg';
 import preloaderIcon from './preloader.svg';
 
 export default function Web() {
-  const { isLoading, isAuthenticated, loginWithRedirect, getAccessTokenSilently, logout } = useConnect();
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      (async () => {
-        const { access_token } = await getAccessTokenSilently();
-        setAccessToken(access_token);
-      })();
-    }
-  }, [getAccessTokenSilently, isAuthenticated]);
-
+  const { isLoading, isAuthorized, authorizeWithRedirect, resetAuthorization, vpToken } = useConnect();
   if (isLoading) {
     return null;
   }
 
   return (
     <div className="connect-wrapper">
-      <div className={`login-wrapper ${isAuthenticated ? 'hidden' : ''}`}>
+      <div className={`login-wrapper ${isAuthorized ? 'hidden' : ''}`}>
         <h2>Login</h2>
         <form className="claim-form">
           <div>
@@ -47,7 +35,7 @@ export default function Web() {
           className="connect-login"
           onSubmit={(e) => {
             e.preventDefault();
-            loginWithRedirect();
+            authorizeWithRedirect();
           }}
         >
           <button type="submit" className="portabl-connect-btn">
@@ -56,20 +44,21 @@ export default function Web() {
           </button>
         </form>
       </div>
-      {(!accessToken && isAuthenticated) || isLoading ? (
-        <div>
-          <Image src={preloaderIcon} alt="loading-spinner" />
-        </div>
-      ) : (
-        <div className={`logged-in-wrapper ${!isAuthenticated ? 'hidden' : ''}`}>
-          <h2>Welcome Back</h2>
+      <div>
+        <Image src={preloaderIcon} alt="loading-spinner" />
+      </div>
+      {isAuthorized && (
+        <div className="logged-in-wrapper">
+          <h2>You are now Authorized</h2>
           <div>
-            <h5>Access Token</h5>
-            <input defaultValue={accessToken || ''} id="access-token" />
+            <h5>Claims</h5>
+            <pre>
+              <code>{JSON.stringify(vpToken, null, 2)}</code>
+            </pre>
+            <button className="logout-btn" onClick={resetAuthorization}>
+              Reset
+            </button>
           </div>
-          <button className="logout-btn" onClick={logout}>
-            Log Out
-          </button>
         </div>
       )}
     </div>

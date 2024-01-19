@@ -12,10 +12,7 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev:sync:react": "turbo run dev --parallel --scope=sync-api --scope=sync-react",
-    "dev:sync:javascript": "turbo run dev --parallel --scope=sync-api --scope=sync-javascript",
-    "dev:connect:react": "turbo run dev --parallel --scope=connect-react",
-    "dev:connect:javascript": "turbo run dev --parallel --scope=connect-javascript",
+    "dev:verify:next": "turbo run dev --parallel --scope=verify-next",
     "format": "prettier --write .",
     "lint": "turbo run lint",
     "test": "turbo run test",

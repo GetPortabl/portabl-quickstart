@@ -685,33 +685,12 @@
   dependencies:
     jwt-decode "^3.1.2"
 
-"@portabl/js-sync-with-portabl@*":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.0.7.tgz#e2305ebb8202b99ec1cadfa3d8a2da02e3e64bbb"
-  integrity sha512-wNY0BLedxLh2kUf3YkEJhPPr7Le9UHU9hG6Qvks0RhSZhSIObZpHluofTl+peqCMV2nI8d7bjQS86kji37m8mg==
-  dependencies:
-    jwt-decode "^3.1.2"
-
-"@portabl/js-sync-with-portabl@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@portabl/js-sync-with-portabl/-/js-sync-with-portabl-0.1.2.tgz#398e0a85d351e1288ab423f1b73927c07931ffbc"
-  integrity sha512-oqxx38MRErLzLYz+ke1v4r8B19a0k2GPM9f5F7eU8DftgnYxvJPQkEqJDdPqPsgsBxFaNk7fczty7yTgBmS2+A==
-  dependencies:
-    jwt-decode "^3.1.2"
-
 "@portabl/react-connect-with-portabl@^0.0.8":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@portabl/react-connect-with-portabl/-/react-connect-with-portabl-0.0.8.tgz#0be22d9aa75c5c7d6aa361b6a7c7b669c3e32b4c"
   integrity sha512-yQ0pNF3ohCgUHrGqWh5Gut7zhtbZddm2B9KuKnRe9o35mhAXNDKlLrWhA6PHRIMDYdPciMdGrfoGQXFGLTi7wQ==
   dependencies:
     "@portabl/js-connect-with-portabl" "*"
-
-"@portabl/react-sync-with-portabl@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@portabl/react-sync-with-portabl/-/react-sync-with-portabl-0.1.2.tgz#7e5dcca70c99a3ce268668b8a447764e91ceb58b"
-  integrity sha512-LlLWYN/gH7HSIuFFuetToGNVl+0vXgJnn3E5tx5U2jjjYxk+R5xIqBIT/1oo+/FO0cPoclrojsp5sJyb9NIPgQ==
-  dependencies:
-    "@portabl/js-sync-with-portabl" "*"
 
 "@rushstack/eslint-patch@^1.1.3":
   version "1.2.0"
@@ -1004,11 +983,6 @@
   integrity sha512-X3HPWTwXRerBZS7Mo1k6vMVR1Z6zmJcDVn5O/31whe0tnjE4te6ZJSJGq1RiqHPjzPdMTfjCFogDJmwng9xHaQ==
   dependencies:
     "@types/superagent" "*"
-
-"@types/uuid@^9.0.2":
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.2.tgz#ede1d1b1e451548d44919dc226253e32a6952c4b"
-  integrity sha512-kNnC1GFBLuhImSnV7w4njQkUiJi0ZXUycu1rUaouPqiKlXkh77JKgdRnTAp1x5eBwcIwbtI+3otwzuIDEuDoxQ==
 
 "@types/yargs-parser@*":
   version "21.0.0"
@@ -6607,11 +6581,6 @@ uuid@^8.3.0:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
-
-uuid@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
-  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 v8-to-istanbul@^7.0.0:
   version "7.1.2"
