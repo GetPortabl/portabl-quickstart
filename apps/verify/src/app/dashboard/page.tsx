@@ -1,5 +1,5 @@
 import Dashboard from '@/components/dashboard';
 
-export default function OverviewPage() {
+export default function WithoutAuthOverviewPage() {
   return <Dashboard />;
 }
