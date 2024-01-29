@@ -4,11 +4,9 @@ ifneq ("$(wildcard docker-compose.local.yml)","")
 DOCKER_COMPOSE_YML += --file docker-compose.local.yml
 endif
 
-integration := sync
-lib := javascript
 SUCCESS_MESSAGE := "✅ $(lib) quickstart is running"
 
-compose_libs := $(integration)-$(lib)
+compose_libs := portabl-next 
 ifeq ($(integration), sync)
 	compose_libs += $(integration)-api
 endif

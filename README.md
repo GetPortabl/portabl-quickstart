@@ -30,21 +30,6 @@ This repository is configured to be built and run using Docker and Docker Compos
 - `logs`: Tails logs from the container.
 - `stop`: Stops the running container.
 
-You can provide the following arguments to these commands:
-
-- `integration`: Specifies the desired integration type (`sync` or `connect`). The default is `sync`.
-- `lib`: Specifies the client-side library to use (`javascript` or `react`). The default is `javascript`.
-
-To start the container, use one of the following commands:
-
-```bash
-make up integration=sync lib=react
-```
-
-```bash
-make up integration=connect lib=react
-```
-
 ### Running without Docker
 
 If you prefer not to use Docker, follow the steps below:
@@ -57,10 +42,10 @@ If you prefer not to use Docker, follow the steps below:
 
 2. Run both the frontend and "api" sample projects in development mode. Choose one of the preset commands based on the integration and library you want to run:
 
-   #### Verify NextJs
+   #### Portabl NextJs Quickstart
 
    ```bash
-   yarn dev:verify:
+   yarn dev:portabl-next:
    ```
 
 ---
@@ -71,6 +56,4 @@ This project utilizes turborepo and [Yarn](https://classic.yarnpkg.com/lang/en/)
 
 ### Apps
 
-**Verify:**
-
-- `verify`: A [Next.js](https://nextjs.org) app.
+- `portabl-next`: A [Next.js](https://nextjs.org) app that demonstrates verifying, authenticating, and issuing.
