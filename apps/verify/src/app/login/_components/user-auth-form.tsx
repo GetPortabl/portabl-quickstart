@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
-import { Icons } from '@/components/icons';
+import Spinner from '@/components/spinner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -46,7 +46,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             />
           </div>
           <Button disabled={isLoading}>
-            {isGenericLoginLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+            {isGenericLoginLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
             Sign In with Email
           </Button>
         </div>
@@ -61,7 +61,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       </div>
       <Button variant="outline" type="button" disabled={isLoading} onClick={authorizeWithRedirect}>
         {isAuthorizeLoading ? (
-          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+          <Spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <Image alt="Portabl" src={portablIcon} className="mr-2 h-4 w-4" />
         )}{' '}

@@ -13,6 +13,12 @@ const config: Config = {
       },
     },
     extend: {
+      gradientColorStops: {
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

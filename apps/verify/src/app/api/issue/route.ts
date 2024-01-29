@@ -7,11 +7,11 @@ const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
 export async function POST(req: Request) {
   try {
-    const { userDID } = await req.json();
+    const { userDID, projectId } = await req.json();
 
     const {
-      data: { userId, projectId, datapointsVerified },
-    } = await getUserAccountByDid({ userDID });
+      data: { userId, datapointsVerified },
+    } = await getUserAccountByDid({ userDID, projectId });
     const { id, ...datapoints } = datapointsVerified;
 
     // Create Issuance Workflow
@@ -19,10 +19,10 @@ export async function POST(req: Request) {
       data: { issuanceWorkflow },
     } = await createIssuanceWorkflow({
       projectId,
+      userDID,
       userId,
       datapoints,
       expiresIn: DAY_IN_MS * 30, // 30 days
-      userDID,
     });
 
     // Send Invitation

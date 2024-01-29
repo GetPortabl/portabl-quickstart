@@ -10,6 +10,7 @@ import {
   PORTABL_CONNECT_DOMAIN,
   PORTABL_VERIFY_ISSUE_PROJECT_ID,
   PORTABL_WALLET_DOMAIN,
+  PROVIDER_NAME,
 } from '@/lib/constants';
 
 export default function Dashboard() {
@@ -18,6 +19,21 @@ export default function Dashboard() {
       <div className="flex-col md:flex">
         <div className="border-b hidden md:block">
           <div className="flex h-16 items-center px-4 ">
+            <div className="text-sm font-bold transition-colors hover:text-primary text-primary flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="mr-1 h-3 w-3"
+              >
+                <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
+              </svg>
+              {PROVIDER_NAME}
+            </div>
             <MainNav className="mx-6" />
             <div className="ml-auto flex items-center space-x-4">
               <UserNav />

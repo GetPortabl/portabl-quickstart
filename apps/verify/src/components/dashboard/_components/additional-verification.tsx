@@ -1,6 +1,7 @@
-import { Icons } from '@/components/icons';
+import Spinner from '@/components/spinner';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { PORTABL_VERIFY_ISSUE_PROJECT_ID } from '@/lib/constants';
 import { useConnect } from '@portabl/react-connect-with-portabl';
 import { useState } from 'react';
 
@@ -15,12 +16,14 @@ export default function additionalVerification() {
         method: 'POST',
         body: JSON.stringify({
           userDID: user?.sub,
+          projectId: PORTABL_VERIFY_ISSUE_PROJECT_ID,
         }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
       const json = await issueResponse.json();
+
       if (json) {
         setIsClaimingIdentity(false);
         setIsIdentityClaimed(true);
@@ -51,20 +54,20 @@ export default function additionalVerification() {
       </CardHeader>
       <CardFooter>
         <Button onClick={handleClaimIdentity} disabled={isClaimingIdentity}>
-          {isClaimingIdentity && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+          {isClaimingIdentity && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
           Claim your identity
         </Button>
       </CardFooter>
     </Card>
   ) : (
-    <Card className="dark:bg-secondary">
+    <Card className="bg-secondary">
       <CardHeader>
         <CardTitle>Please complete verifying your identity.</CardTitle>
         <CardDescription>We need to confirm a few things about you.</CardDescription>
       </CardHeader>
       <CardFooter>
         <Button onClick={authorizeWithRedirect} disabled={isLoading}>
-          {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />} Complete your identity
+          {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />} Complete your identity
         </Button>
       </CardFooter>
     </Card>

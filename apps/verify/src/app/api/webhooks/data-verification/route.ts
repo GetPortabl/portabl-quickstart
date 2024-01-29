@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     } = await req.json();
 
     const {
-      data: { userId, projectId, datapointsVerified, userDID },
+      data: { projectId, userDID, userId, datapointsVerified },
     } = await getUserAccount({ userAccountId });
 
     if (projectId !== PORTABL_VERIFY_ISSUE_AUTH_PROJECT_ID) {
@@ -29,10 +29,10 @@ export async function POST(req: Request) {
       data: { issuanceWorkflow },
     } = await createIssuanceWorkflow({
       projectId,
+      userDID,
       userId,
       datapoints,
       expiresIn: DAY_IN_MS * 30, // 30 days
-      userDID,
     });
 
     // Send Invitation

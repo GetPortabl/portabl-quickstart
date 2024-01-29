@@ -1,3 +1,6 @@
+export const THEME = process.env.NEXT_PUBLIC_THEME || 'dark';
+export const PROVIDER_NAME = process.env.NEXT_PUBLIC_PROVIDER_NAME || 'BankTrust';
+
 export const PORTABL_API_DOMAIN = process.env.PORTABL_API_DOMAIN;
 export const PORTABL_CLIENT_ID = process.env.PORTABL_CLIENT_ID || '';
 export const PORTABL_CLIENT_SECRET = process.env.PORTABL_CLIENT_SECRET || '';

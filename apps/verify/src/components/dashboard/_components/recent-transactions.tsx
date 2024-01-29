@@ -41,7 +41,6 @@ export function RecentTransactions() {
       </div>
       <div className="flex items-center">
         <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/05.png" alt="Avatar" />
           <AvatarFallback>UB</AvatarFallback>
         </Avatar>
         <div className="ml-4 space-y-1">

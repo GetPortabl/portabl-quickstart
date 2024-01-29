@@ -5,18 +5,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { UserAuthForm } from './_components/user-auth-form';
+import { PROVIDER_NAME } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Authentication',
-  description: 'Authentication forms built using the components.',
+  title: 'Portabl Quickstart - Login',
 };
 
 export default function AuthenticationPage() {
   return (
     <>
       <div className="container relative  min-h-screen flex flex-row md:flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:p-0 p-10">
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-cyan-500" />
+        <div className="relative hidden h-full flex-col p-10 text-foreground lg:flex dark:border-r">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary to-cyan-500" />
           <div className="relative z-20 flex items-center text-lg font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -26,11 +26,11 @@ export default function AuthenticationPage() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="mr-2 h-6 w-6"
+              className="mr-2 h-6 w-6 "
             >
               <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
             </svg>
-            Bank Trust
+            {PROVIDER_NAME}
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
@@ -57,7 +57,7 @@ export default function AuthenticationPage() {
                 >
                   <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
                 </svg>
-                Bank Trust
+                {PROVIDER_NAME}
               </div>
             </div>
             <UserAuthForm />

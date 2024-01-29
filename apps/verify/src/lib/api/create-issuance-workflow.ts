@@ -3,16 +3,16 @@ import getPortablClientToken from './get-portabl-client-token';
 
 export default async function createIssuanceWorkflow({
   projectId,
+  userDID,
   userId,
   datapoints,
   expiresIn,
-  userDID,
 }: {
   projectId: string;
+  userDID: string;
   userId: string;
   datapoints: string;
   expiresIn: number;
-  userDID: string;
 }) {
   const accessToken = await getPortablClientToken();
 
@@ -20,10 +20,10 @@ export default async function createIssuanceWorkflow({
     method: 'POST',
     body: JSON.stringify({
       projectId,
+      userDID,
       userId,
       datapoints,
       expiresIn,
-      userDID,
     }),
     headers: {
       'Content-Type': 'application/json',
