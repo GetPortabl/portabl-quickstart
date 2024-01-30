@@ -4,11 +4,9 @@ ifneq ("$(wildcard docker-compose.local.yml)","")
 DOCKER_COMPOSE_YML += --file docker-compose.local.yml
 endif
 
-integration := sync
-lib := javascript
-SUCCESS_MESSAGE := "✅ $(lib) quickstart is running"
+SUCCESS_MESSAGE := "✅ successfully executed"
 
-compose_libs := $(integration)-$(lib)
+compose_libs := portabl-next 
 ifeq ($(integration), sync)
 	compose_libs += $(integration)-api
 endif
@@ -18,6 +16,14 @@ up:
 	$(DOCKER_COMPOSE) \
 		$(DOCKER_COMPOSE_YML) \
 		$@ --build --detach --remove-orphans \
+		$(compose_libs)
+	@echo $(SUCCESS_MESSAGE)
+
+.PHONY: down 
+down:
+	$(DOCKER_COMPOSE) \
+		$(DOCKER_COMPOSE_YML) \
+		$@ \
 		$(compose_libs)
 	@echo $(SUCCESS_MESSAGE)
 

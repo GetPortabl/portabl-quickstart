@@ -12,16 +12,15 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev:sync:react": "turbo run dev --parallel --scope=sync-api --scope=sync-react",
-    "dev:sync:javascript": "turbo run dev --parallel --scope=sync-api --scope=sync-javascript",
-    "dev:connect:react": "turbo run dev --parallel --scope=connect-react",
-    "dev:connect:javascript": "turbo run dev --parallel --scope=connect-javascript",
+    "dev:portabl-next": "turbo run dev --parallel --scope=portabl-next",
     "format": "prettier --write .",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "prepare": "husky install"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@portabl/react-connect-with-portabl": "^0.0.9"
+  },
   "devDependencies": {
     "eslint-config-custom": "*",
     "husky": ">=6",
