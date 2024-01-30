@@ -18,7 +18,9 @@
     "test": "turbo run test",
     "prepare": "husky install"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@portabl/react-connect-with-portabl": "^0.0.9"
+  },
   "devDependencies": {
     "eslint-config-custom": "*",
     "husky": ">=6",
