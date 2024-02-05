@@ -7,7 +7,6 @@ export default async function exchangeToken({ idTokenJwt, projectId }: { idToken
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Origin: 'http://localhost:4002',
     },
     body: JSON.stringify({
       id_token: idTokenJwt,
