@@ -9,8 +9,10 @@ import {
   THEME,
 } from '@/lib/constants';
 import { ConnectProvider } from '@portabl/react-connect-with-portabl';
+import { useSearchParams } from 'next/navigation';
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  const searchParams = useSearchParams();
   return (
     <ThemeProvider attribute={'class'} forcedTheme={THEME} disableTransitionOnChange>
       <ConnectProvider
@@ -18,6 +20,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         projectId={PORTABL_VERIFY_ISSUE_AUTH_PROJECT_ID}
         connectDomain={PORTABL_CONNECT_DOMAIN}
         walletDomain={PORTABL_WALLET_DOMAIN}
+        searchParams={searchParams}
       >
         {children}
       </ConnectProvider>

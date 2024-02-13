@@ -1,4 +1,5 @@
 'use client';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { MainNav } from './_components/main-nav';
 import { RecentTransactions } from './_components/recent-transactions';
@@ -12,8 +13,10 @@ import {
   PORTABL_WALLET_DOMAIN,
   PROVIDER_NAME,
 } from '@/lib/constants';
+import { useSearchParams } from 'next/navigation';
 
 export default function Dashboard() {
+  const searchParams = useSearchParams();
   return (
     <>
       <div className="flex-col md:flex">
@@ -56,6 +59,7 @@ export default function Dashboard() {
             projectId={PORTABL_VERIFY_ISSUE_PROJECT_ID}
             connectDomain={PORTABL_CONNECT_DOMAIN}
             walletDomain={PORTABL_WALLET_DOMAIN}
+            searchParams={searchParams}
           >
             <AdditionalVerification />
           </ConnectProvider>

@@ -218,6 +218,13 @@
     "@sphereon/ssi-types" "^0.18.0"
     jwt-decode "^3.1.2"
 
+"@portabl/react-connect-with-portabl@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@portabl/react-connect-with-portabl/-/react-connect-with-portabl-0.0.10.tgz#b56b43a4f17212b3d5bbc8aa30f6189b88a0bf19"
+  integrity sha512-DX9fJLYDvpedKH77INodzjLzWXVOE1tYHRy3/trK0+jwjKjyDtZpS9SBPIBbkbsCI6/3bmrcxEiqlXT1VLhwhA==
+  dependencies:
+    "@portabl/js-connect-with-portabl" "*"
+
 "@portabl/react-connect-with-portabl@^0.0.9":
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@portabl/react-connect-with-portabl/-/react-connect-with-portabl-0.0.9.tgz#f963a9c659fc948458df499bc3341272377c1d8b"
