@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'Portabl - Connect',
 };
+export const dynamic = 'force-dynamic';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
