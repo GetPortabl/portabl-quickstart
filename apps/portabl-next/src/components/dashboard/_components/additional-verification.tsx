@@ -4,7 +4,6 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/comp
 import { PORTABL_VERIFY_ISSUE_PROJECT_ID } from '@/lib/constants';
 import { useConnect } from '@portabl/react-connect-with-portabl';
 import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 
 export default function additionalVerification() {
   const { authorizeWithRedirect, isLoading, isAuthorized, vpToken, user } = useConnect();
