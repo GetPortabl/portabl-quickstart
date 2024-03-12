@@ -3,7 +3,7 @@ import { BASE_URL, PORTABL_CLIENT_ID, PORTABL_CLIENT_SECRET } from '../constants
 let accessToken: string;
 export default async function getPortablClientToken() {
   if (!accessToken) {
-    const tokenResponse = await fetch(`${BASE_URL}/provider/token`, {
+    const tokenResponse = await fetch(`${BASE_URL}/auth/token`, {
       method: 'POST',
       body: JSON.stringify({
         clientId: PORTABL_CLIENT_ID,
