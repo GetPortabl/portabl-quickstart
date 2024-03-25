@@ -210,20 +210,20 @@
     picocolors "^1.0.0"
     tslib "^2.5.0"
 
-"@portabl/js-connect-with-portabl@*":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@portabl/js-connect-with-portabl/-/js-connect-with-portabl-0.0.9.tgz#2b107d08faf1ff7478d7dece056987441996d6fc"
-  integrity sha512-PmudKZIXK8aH3+h5nFuQheTcvYQ+96obtVXCL8G1xNv0JLYDc7Qk3cvEvkBKEAbPVzT1fguTE2uJ9hqTtfYF4A==
+"@portabl/js-connect-with-portabl@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@portabl/js-connect-with-portabl/-/js-connect-with-portabl-0.0.10.tgz#ecce274ff484a2545a6e7d6c4f4e7b697841f7e0"
+  integrity sha512-0hr+o5B1dOp6EmsyTG81BvVuRkMZ1anBJSMi6eyO98Ac/lhipmUHvbtwS9HzL9mpZq7gxddN+D8tz2l6Tf0GxA==
   dependencies:
     "@sphereon/ssi-types" "^0.18.0"
     jwt-decode "^3.1.2"
 
-"@portabl/react-connect-with-portabl@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@portabl/react-connect-with-portabl/-/react-connect-with-portabl-0.0.10.tgz#b56b43a4f17212b3d5bbc8aa30f6189b88a0bf19"
-  integrity sha512-DX9fJLYDvpedKH77INodzjLzWXVOE1tYHRy3/trK0+jwjKjyDtZpS9SBPIBbkbsCI6/3bmrcxEiqlXT1VLhwhA==
+"@portabl/react-connect-with-portabl@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@portabl/react-connect-with-portabl/-/react-connect-with-portabl-0.0.12.tgz#8046b0f27ab70d0a43e997a84b93a86c58f15799"
+  integrity sha512-XUU2zYUnils3vSmpVDFFKI79iGwc31cJyCt+3zoX5kxlAlt/0fC7gjW++hBBfOGQ3auFr3y16ekbFF/kfPQCSQ==
   dependencies:
-    "@portabl/js-connect-with-portabl" "*"
+    "@portabl/js-connect-with-portabl" "^0.0.10"
 
 "@radix-ui/primitive@1.0.1":
   version "1.0.1"
