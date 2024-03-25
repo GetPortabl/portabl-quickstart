@@ -45,7 +45,7 @@ If you prefer not to use Docker, follow the steps below:
    #### Portabl NextJs Quickstart
 
    ```bash
-   yarn dev:portabl-next
+   yarn dev
    ```
 
 ---
