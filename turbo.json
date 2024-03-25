@@ -4,9 +4,9 @@
       "outputs": ["dist/**", ".next/**", "public/dist/**"],
       "dependsOn": ["^build"],
       "env": [
-        "NEXT_PUBLIC_PORTABL_ACCOUNT_ID",
+        "NEXT_PUBLIC_PORTABL_ORGANIZATION_ID",
         "NEXT_PUBLIC_PORTABL_CONNECT_DOMAIN",
-        "NEXT_PUBLIC_PORTABL_WALLET_DOMAIN",
+        "NEXT_PUBLIC_PORTABL_PASSPORT_DOMAIN",
         "NEXT_PUBLIC_PORTABL_VERIFY_ISSUE_AUTH_PROJECT_ID",
         "NEXT_PUBLIC_PORTABL_VERIFY_ISSUE_PROJECT_ID",
 

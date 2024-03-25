@@ -7,10 +7,10 @@ import { UserNav } from './_components/user-nav';
 import { ConnectProvider } from '@portabl/react-connect-with-portabl';
 import AdditionalVerification from './_components/additional-verification';
 import {
-  PORTABL_ACCOUNT_ID,
+  PORTABL_ORGANIZATION_ID,
   PORTABL_CONNECT_DOMAIN,
   PORTABL_VERIFY_ISSUE_PROJECT_ID,
-  PORTABL_WALLET_DOMAIN,
+  PORTABL_PASSPORT_DOMAIN,
   PROVIDER_NAME,
 } from '@/lib/constants';
 import { useSearchParams } from 'next/navigation';
@@ -55,10 +55,10 @@ export default function Dashboard() {
             <h2 className="text-3xl font-bold tracking-tight">Overview</h2>
           </div>
           <ConnectProvider
-            accountId={PORTABL_ACCOUNT_ID}
+            organizationId={PORTABL_ORGANIZATION_ID}
             projectId={PORTABL_VERIFY_ISSUE_PROJECT_ID}
             connectDomain={PORTABL_CONNECT_DOMAIN}
-            walletDomain={PORTABL_WALLET_DOMAIN}
+            passportDomain={PORTABL_PASSPORT_DOMAIN}
             searchParams={searchParams}
           >
             <AdditionalVerification />
