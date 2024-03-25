@@ -1,7 +1,7 @@
-import { BASE_URL, PORTABL_ACCOUNT_ID } from '../constants';
+import { BASE_URL, PORTABL_ORGANIZATION_ID } from '../constants';
 
 export default async function exchangeToken({ idTokenJwt, projectId }: { idTokenJwt: string; projectId: string }) {
-  const url: URL = new URL(`${BASE_URL}/agent/${PORTABL_ACCOUNT_ID}/oauth2/token`);
+  const url: URL = new URL(`${BASE_URL}/agent/${PORTABL_ORGANIZATION_ID}/oauth2/token`);
 
   const tokenEndpointResponse: Response = await fetch(url.toString(), {
     method: 'POST',

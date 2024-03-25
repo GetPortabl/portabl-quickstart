@@ -12,7 +12,7 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev:portabl-next": "turbo run dev --parallel --scope=portabl-next",
+    "dev": "turbo run dev --parallel --scope=portabl-next",
     "format": "prettier --write .",
     "lint": "turbo run lint",
     "test": "turbo run test",
