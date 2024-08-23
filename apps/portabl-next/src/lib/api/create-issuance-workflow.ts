@@ -7,12 +7,14 @@ export default async function createIssuanceWorkflow({
   userId,
   datapoints,
   expiresIn,
+  statusChangeTerms,
 }: {
   projectId: string;
   userDID: string;
   userId: string;
-  datapoints: string;
+  datapoints: any; // TODO
   expiresIn: number;
+  statusChangeTerms?: any;
 }) {
   const accessToken = await getPortablClientToken();
 
@@ -24,6 +26,7 @@ export default async function createIssuanceWorkflow({
       userId,
       datapoints,
       expiresIn,
+      ...(statusChangeTerms ? { statusChangeTerms } : {}),
     }),
     headers: {
       'Content-Type': 'application/json',

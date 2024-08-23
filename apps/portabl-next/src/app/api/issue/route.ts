@@ -23,6 +23,10 @@ export async function POST(req: Request) {
       userId,
       datapoints,
       expiresIn: DAY_IN_MS * 30, // 30 days
+      statusChangeTerms: {
+        status: 'SUSPENDED', // 'SUSPENDED', 'REVOKED'
+        statusUpdateTrigger: 'WORKFLOW_COMPLETION', // 'WORKFLOW_CREATION', 'WORKFLOW_COMPLETION'
+      },
     });
 
     // Send Invitation
